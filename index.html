@@ -1,109 +1,279 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>ElectroProjects Store</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Electronics Project Store</title>
 
 <style>
-
+:root{
+  --bg:#0f172a;
+  --card:#111827;
+  --accent:#22c55e;
+  --accent2:#3b82f6;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+}
+*{box-sizing:border-box}
 body{
-font-family: Arial;
-background-color:#f2f2f2;
-margin:0;
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(120deg,#0f172a,#020617);
+  color:var(--text);
 }
 
+/* Header */
 header{
-background:#1f2937;
-color:white;
-padding:20px;
-text-align:center;
+  padding:28px 16px;
+  text-align:center;
+  background:linear-gradient(135deg,#1d4ed8,#22c55e);
+  color:white;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
 }
+header h1{margin:0 0 6px 0;font-size:28px;letter-spacing:.5px}
+header p{margin:0;opacity:.9}
 
+/* Container */
 .container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-margin:20px;
+  max-width:1100px;
+  margin:28px auto;
+  padding:0 16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
 }
 
+/* Product Card */
 .card{
-background:white;
-width:250px;
-margin:15px;
-padding:15px;
-border-radius:8px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
-text-align:center;
+  background:var(--card);
+  border-radius:12px;
+  padding:16px;
+  box-shadow:0 12px 25px rgba(0,0,0,.45);
+  transition:.25s transform,.25s box-shadow;
+  position:relative;
 }
-
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 35px rgba(0,0,0,.6);
+}
 .card img{
-width:100%;
-height:150px;
-object-fit:cover;
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.card h3{margin:10px 0 4px 0}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.price{margin-top:8px;font-weight:700;color:var(--accent)}
+.btn{
+  margin-top:12px;
+  width:100%;
+  border:none;
+  border-radius:8px;
+  padding:10px;
+  background:var(--accent2);
+  color:white;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn:hover{background:#2563eb}
+
+/* Floating Cart */
+.cart-btn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#22c55e;
+  color:#001;
+  padding:14px 18px;
+  border-radius:30px;
+  font-weight:700;
+  box-shadow:0 10px 25px rgba(0,0,0,.45);
+  cursor:pointer;
+}
+.badge{
+  background:#111827;
+  color:white;
+  border-radius:50%;
+  padding:3px 8px;
+  margin-left:6px;
+  font-size:12px;
 }
 
-.price{
-color:green;
-font-size:20px;
+/* Modal */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
 }
-
-button{
-background:#2563eb;
-color:white;
-border:none;
-padding:10px 15px;
-cursor:pointer;
-border-radius:5px;
+.modal-content{
+  background:#020617;
+  border-radius:12px;
+  max-width:420px;
+  width:100%;
+  padding:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.7);
 }
-
-button:hover{
-background:#1d4ed8;
+.modal h2{margin-top:0}
+input,textarea{
+  width:100%;
+  padding:9px;
+  margin:6px 0 10px 0;
+  border-radius:6px;
+  border:none;
 }
-
+.pay{
+  width:100%;
+  padding:11px;
+  border:none;
+  border-radius:8px;
+  background:#22c55e;
+  color:black;
+  font-weight:700;
+  cursor:pointer;
+}
+.whatsapp{
+  margin-top:10px;
+  width:100%;
+  padding:11px;
+  border:none;
+  border-radius:8px;
+  background:#25D366;
+  color:black;
+  font-weight:700;
+  cursor:pointer;
+}
+.close{
+  margin-top:10px;
+  background:#ef4444;
+  color:white;
+}
+footer{
+  text-align:center;
+  margin:40px 0 25px 0;
+  color:var(--muted);
+  font-size:13px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Electronic Projects Store</h1>
-<p>Buy Electronics Projects for Students</p>
+<h1>Electronics Project Store</h1>
+<p>Final Year & DIY Electronics Projects</p>
 </header>
 
 <div class="container">
 
 <div class="card">
-<img src="https://via.placeholder.com/250">
+<img src="https://images.unsplash.com/photo-1581092335397-9fa3411088b2?auto=format&fit=crop&w=600&q=60">
 <h3>Metal Sorting Machine</h3>
-<p>Inductive sensor based metal detector with robotic arm.</p>
-<p class="price">₹2500</p>
-<button>Buy Now</button>
+<p>Inductive sensor based sorting project</p>
+<div class="price">₹2500</div>
+<button class="btn" onclick="add('Metal Sorting Machine',2500)">Add to Cart</button>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/250">
+<img src="https://images.unsplash.com/photo-1581091870627-3d8c1d75f4fb?auto=format&fit=crop&w=600&q=60">
 <h3>Smart Wheelchair</h3>
-<p>Wheelchair with MAX30100 health monitoring.</p>
-<p class="price">₹4500</p>
-<button>Buy Now</button>
+<p>Health monitoring MAX30100</p>
+<div class="price">₹4500</div>
+<button class="btn" onclick="add('Smart Wheelchair',4500)">Add to Cart</button>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/250">
+<img src="https://images.unsplash.com/photo-1581092921461-39b0a93f6a38?auto=format&fit=crop&w=600&q=60">
 <h3>Bluetooth Home Automation</h3>
-<p>Control appliances using mobile Bluetooth.</p>
-<p class="price">₹1800</p>
-<button>Buy Now</button>
+<p>Control appliances via mobile</p>
+<div class="price">₹1800</div>
+<button class="btn" onclick="add('Bluetooth Home Automation',1800)">Add to Cart</button>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/250">
+<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=60">
 <h3>Line Following Robot</h3>
-<p>Autonomous robot using IR sensors.</p>
-<p class="price">₹1200</p>
-<button>Buy Now</button>
+<p>IR sensor autonomous robot</p>
+<div class="price">₹1200</div>
+<button class="btn" onclick="add('Line Following Robot',1200)">Add to Cart</button>
 </div>
 
 </div>
+
+<div class="cart-btn" onclick="openCart()">
+Cart <span id="count" class="badge">0</span>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="cartModal">
+<div class="modal-content">
+<h2>Your Order</h2>
+<ul id="list"></ul>
+<p><b>Total ₹<span id="total">0</span></b></p>
+
+<input id="name" placeholder="Your Name">
+<input id="phone" placeholder="Phone Number">
+<textarea id="address" placeholder="Delivery Address"></textarea>
+
+<button class="pay" onclick="payUPI()">Pay with UPI</button>
+<button class="whatsapp" onclick="sendWA()">Order via WhatsApp</button>
+<button class="pay close" onclick="closeCart()">Close</button>
+
+</div>
+</div>
+
+<footer>
+© Electronics Project Store
+</footer>
+
+<script>
+let items=[]
+let total=0
+
+function add(name,price){
+items.push({name,price})
+total+=price
+document.getElementById("count").innerText=items.length
+alert(name+" added to cart")
+}
+
+function openCart(){
+const list=document.getElementById("list")
+list.innerHTML=""
+items.forEach(i=>{
+const li=document.createElement("li")
+li.innerText=i.name+" ₹"+i.price
+list.appendChild(li)
+})
+document.getElementById("total").innerText=total
+document.getElementById("cartModal").style.display="flex"
+}
+
+function closeCart(){
+document.getElementById("cartModal").style.display="none"
+}
+
+function payUPI(){
+let link="upi://pay?pa=7276057489@ybl&pn=ElectronicsStore&am="+total+"&cu=INR"
+window.location.href=link
+}
+
+function sendWA(){
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let address=document.getElementById("address").value
+
+let msg="New Order:%0A"
+items.forEach(i=>msg+=i.name+" ₹"+i.price+"%0A")
+msg+="Total ₹"+total+"%0AName:"+name+"%0APhone:"+phone+"%0AAddress:"+address
+
+window.open("https://wa.me/917276057489?text="+msg)
+}
+</script>
 
 </body>
 </html>
