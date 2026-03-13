@@ -3,102 +3,120 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Electronics Component Store</title>
+<title>Electronics Hub</title>
 
 <style>
 
-body{
-font-family:Arial;
+*{
+box-sizing:border-box;
 margin:0;
-background:#f5f5f5;
+padding:0;
+font-family:Segoe UI,Arial;
 }
 
-header{
-background:#1f2937;
+body{
+background:#f4f6f9;
+}
+
+/* NAVBAR */
+
+nav{
+background:#111827;
 color:white;
-padding:15px;
+padding:14px 30px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
 
-#search{
-padding:8px;
-width:250px;
-border-radius:5px;
-border:none;
+nav h1{
+font-size:22px;
 }
 
+.search{
+padding:8px;
+border-radius:5px;
+border:none;
+width:250px;
+}
+
+/* PRODUCT GRID */
+
 .container{
+padding:30px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-padding:20px;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:25px;
 }
 
 .card{
 background:white;
-border-radius:10px;
+border-radius:12px;
 padding:15px;
 text-align:center;
-box-shadow:0 3px 8px rgba(0,0,0,0.2);
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
 .card img{
-width:120px;
-height:120px;
+width:130px;
+height:130px;
 object-fit:contain;
+margin-bottom:10px;
 }
 
 .price{
-color:green;
+color:#16a34a;
 font-weight:bold;
+margin:5px 0;
 }
 
 button{
-background:#2563eb;
-color:white;
 border:none;
 padding:8px 12px;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
-margin-top:5px;
-}
-
-button:hover{
-background:#1d4ed8;
-}
-
-#cart{
-position:fixed;
-right:0;
-top:0;
-width:300px;
-height:100%;
-background:#111827;
+margin:3px;
+background:#2563eb;
 color:white;
-padding:20px;
-overflow:auto;
 }
 
-.cartItem{
-border-bottom:1px solid gray;
-padding:8px 0;
-}
+/* ENQUIRY SECTION */
 
 #enquiry{
 background:white;
-padding:20px;
-margin:20px;
-border-radius:10px;
+margin:40px;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 input,textarea{
 width:100%;
-padding:8px;
-margin:5px 0;
-border-radius:5px;
+padding:10px;
+margin:6px 0;
+border-radius:6px;
 border:1px solid #ccc;
+}
+
+/* FLOATING WHATSAPP */
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:12px 16px;
+border-radius:50px;
+font-weight:bold;
+box-shadow:0 4px 12px rgba(0,0,0,0.3);
+text-decoration:none;
 }
 
 </style>
@@ -106,22 +124,22 @@ border:1px solid #ccc;
 
 <body>
 
-<header>
+<nav>
 
-<h1>Electronics Store</h1>
+<h1>Electronics Hub</h1>
 
-<input id="search" placeholder="Search component..." onkeyup="searchProduct()">
+<input class="search" id="search" placeholder="Search components..." onkeyup="searchProduct()">
 
-</header>
+</nav>
 
-<div class="container" id="products">
+
+<div class="container">
 
 <div class="card" data-name="resistor">
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Resistors.jpg">
 <h3>1K Resistor Pack</h3>
 <p>10 pcs</p>
 <p class="price">₹10</p>
-<button onclick="add('1K Resistor Pack',10)">Add to Cart</button>
 <button onclick="getInfo('1K Resistor Pack')">Get Info</button>
 </div>
 
@@ -129,7 +147,6 @@ border:1px solid #ccc;
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Arduino_Uno_-_R3.jpg">
 <h3>Arduino UNO</h3>
 <p class="price">₹350</p>
-<button onclick="add('Arduino UNO',350)">Add to Cart</button>
 <button onclick="getInfo('Arduino UNO')">Get Info</button>
 </div>
 
@@ -137,7 +154,6 @@ border:1px solid #ccc;
 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/HC-SR04_Ultrasonic_Sensor.jpg">
 <h3>Ultrasonic Sensor</h3>
 <p class="price">₹80</p>
-<button onclick="add('Ultrasonic Sensor',80)">Add to Cart</button>
 <button onclick="getInfo('Ultrasonic Sensor')">Get Info</button>
 </div>
 
@@ -145,103 +161,36 @@ border:1px solid #ccc;
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/DC_Motor.jpg">
 <h3>DC Motor</h3>
 <p class="price">₹120</p>
-<button onclick="add('DC Motor',120)">Add to Cart</button>
 <button onclick="getInfo('DC Motor')">Get Info</button>
 </div>
 
 </div>
 
-<div id="cart">
-
-<h2>Cart</h2>
-
-<div id="cartList"></div>
-
-<h3>Total ₹<span id="total">0</span></h3>
-
-</div>
 
 <div id="enquiry">
 
-<h2>Website Enquiry</h2>
+<h2>Product Enquiry / Suggest Idea</h2>
 
 <input id="ename" placeholder="Your Name">
 
 <input id="ephone"
-type="tel"
 maxlength="10"
 placeholder="Phone Number"
 oninput="this.value=this.value.replace(/[^0-9]/g,'')">
 
-<textarea id="emsg" placeholder="Your enquiry"></textarea>
+<textarea id="emsg" placeholder="Your enquiry or idea"></textarea>
 
-<button onclick="sendEnquiry()">Send Enquiry</button>
+<button onclick="sendEnquiry()">Send</button>
 
 </div>
 
+
+<a class="whatsapp" href="https://wa.me/917276057489" target="_blank">
+Chat on WhatsApp
+</a>
+
+
 <script>
-
-let cart=[]
-
-function add(name,price){
-
-let item=cart.find(i=>i.name==name)
-
-if(item){
-item.qty++
-}else{
-cart.push({name,price,qty:1})
-}
-
-render()
-
-}
-
-function render(){
-
-let box=document.getElementById("cartList")
-
-box.innerHTML=""
-
-let total=0
-
-cart.forEach(i=>{
-
-let div=document.createElement("div")
-
-div.className="cartItem"
-
-div.innerHTML=i.name+" x"+i.qty+" ₹"+(i.qty*i.price)
-
-box.appendChild(div)
-
-total+=i.qty*i.price
-
-})
-
-document.getElementById("total").innerText=total
-
-}
-
-function searchProduct(){
-
-let input=document.getElementById("search").value.toLowerCase()
-
-let cards=document.querySelectorAll(".card")
-
-cards.forEach(c=>{
-
-let name=c.getAttribute("data-name")
-
-if(name.includes(input)){
-c.style.display="block"
-}else{
-c.style.display="none"
-}
-
-})
-
-}
 
 function getInfo(product){
 
@@ -263,6 +212,26 @@ let text="New Website Enquiry%0A"+
 "%0AMessage: "+msg
 
 window.open("https://wa.me/917276057489?text="+text)
+
+}
+
+function searchProduct(){
+
+let input=document.getElementById("search").value.toLowerCase()
+
+let cards=document.querySelectorAll(".card")
+
+cards.forEach(c=>{
+
+let name=c.getAttribute("data-name")
+
+if(name.includes(input)){
+c.style.display="block"
+}else{
+c.style.display="none"
+}
+
+})
 
 }
 
