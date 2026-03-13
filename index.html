@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Electronics Hub</title>
+<title>Arduino Project Store</title>
 
 <style>
 
@@ -11,41 +11,33 @@
 box-sizing:border-box;
 margin:0;
 padding:0;
-font-family:Segoe UI,Arial;
+font-family:Arial;
 }
 
 body{
 background:#f4f6f9;
 }
 
-/* NAVBAR */
-
 nav{
 background:#111827;
 color:white;
-padding:14px 30px;
+padding:15px 25px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 }
 
-nav h1{
-font-size:22px;
-}
-
 .search{
 padding:8px;
-border-radius:5px;
+border-radius:6px;
 border:none;
 width:250px;
 }
 
-/* PRODUCT GRID */
-
 .container{
 padding:30px;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:25px;
 }
 
@@ -54,57 +46,34 @@ background:white;
 border-radius:12px;
 padding:15px;
 text-align:center;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 20px rgba(0,0,0,0.2);
+transform:translateY(-6px);
 }
 
 .card img{
-width:130px;
+width:150px;
 height:130px;
 object-fit:contain;
-margin-bottom:10px;
 }
 
 .price{
-color:#16a34a;
+color:green;
 font-weight:bold;
 margin:5px 0;
 }
 
 button{
+background:#2563eb;
+color:white;
 border:none;
 padding:8px 12px;
 border-radius:6px;
 cursor:pointer;
-margin:3px;
-background:#2563eb;
-color:white;
 }
-
-/* ENQUIRY SECTION */
-
-#enquiry{
-background:white;
-margin:40px;
-padding:25px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-input,textarea{
-width:100%;
-padding:10px;
-margin:6px 0;
-border-radius:6px;
-border:1px solid #ccc;
-}
-
-/* WHATSAPP BUTTON */
 
 .whatsapp{
 position:fixed;
@@ -114,9 +83,8 @@ background:#25D366;
 color:white;
 padding:12px 16px;
 border-radius:50px;
-font-weight:bold;
-box-shadow:0 4px 12px rgba(0,0,0,0.3);
 text-decoration:none;
+font-weight:bold;
 }
 
 </style>
@@ -127,59 +95,109 @@ text-decoration:none;
 
 <nav>
 
-<h1>Electronics Hub</h1>
+<h2>Arduino Project Store</h2>
 
-<input class="search" id="search" placeholder="Search components..." onkeyup="searchProduct()">
+<input class="search" id="search" placeholder="Search project..." onkeyup="searchProduct()">
 
 </nav>
 
 <div class="container">
 
-<div class="card" data-name="resistor">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Resistors.jpg">
-<h3>1K Resistor Pack</h3>
-<p>10 pcs</p>
-<p class="price">₹10</p>
-<button onclick="getInfo('1K Resistor Pack')">Get Info</button>
+<div class="card" data-name="line follower robot">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Line_follower_robot.jpg">
+
+<h3>Line Follower Robot</h3>
+
+<p class="price">₹1500</p>
+
+<button onclick="getInfo('Line Follower Robot ₹1500')">Get Info</button>
+
 </div>
 
-<div class="card" data-name="arduino">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Arduino_Uno_-_R3.jpg">
-<h3>Arduino UNO</h3>
-<p class="price">₹350</p>
-<button onclick="getInfo('Arduino UNO')">Get Info</button>
+<div class="card" data-name="bluetooth robot">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Arduino_robot.jpg">
+
+<h3>Bluetooth Controlled Robot</h3>
+
+<p class="price">₹2500</p>
+
+<button onclick="getInfo('Bluetooth Controlled Robot ₹2500')">Get Info</button>
+
 </div>
 
-<div class="card" data-name="sensor">
+<div class="card" data-name="smart irrigation">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Soil_Moisture_Sensor.jpg">
+
+<h3>Smart Irrigation System</h3>
+
+<p class="price">₹3500</p>
+
+<button onclick="getInfo('Smart Irrigation System ₹3500')">Get Info</button>
+
+</div>
+
+<div class="card" data-name="rfid attendance">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/RFID_system.jpg">
+
+<h3>RFID Attendance System</h3>
+
+<p class="price">₹4500</p>
+
+<button onclick="getInfo('RFID Attendance System ₹4500')">Get Info</button>
+
+</div>
+
+<div class="card" data-name="smart parking">
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/HC-SR04_Ultrasonic_Sensor.jpg">
-<h3>Ultrasonic Sensor</h3>
-<p class="price">₹80</p>
-<button onclick="getInfo('Ultrasonic Sensor')">Get Info</button>
-</div>
 
-<div class="card" data-name="motor">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/DC_Motor.jpg">
-<h3>DC Motor</h3>
-<p class="price">₹120</p>
-<button onclick="getInfo('DC Motor')">Get Info</button>
-</div>
+<h3>Smart Parking System</h3>
+
+<p class="price">₹6500</p>
+
+<button onclick="getInfo('Smart Parking System ₹6500')">Get Info</button>
 
 </div>
 
-<div id="enquiry">
+<div class="card" data-name="iot weather">
 
-<h2>Product Enquiry / Suggest Idea</h2>
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Weather_station.jpg">
 
-<input id="ename" placeholder="Your Name">
+<h3>IoT Weather Station</h3>
 
-<input id="ephone"
-maxlength="10"
-placeholder="Phone Number"
-oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+<p class="price">₹8000</p>
 
-<textarea id="emsg" placeholder="Your enquiry or idea"></textarea>
+<button onclick="getInfo('IoT Weather Station ₹8000')">Get Info</button>
 
-<button onclick="sendEnquiry()">Send</button>
+</div>
+
+<div class="card" data-name="robotic arm">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Robot_arm.jpg">
+
+<h3>Arduino Robotic Arm</h3>
+
+<p class="price">₹12000</p>
+
+<button onclick="getInfo('Arduino Robotic Arm ₹12000')">Get Info</button>
+
+</div>
+
+<div class="card" data-name="metal sorting">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Industrial_robot_arm.jpg">
+
+<h3>Metal Sorting System</h3>
+
+<p class="price">₹18000</p>
+
+<button onclick="getInfo('Metal Sorting System ₹18000')">Get Info</button>
+
+</div>
 
 </div>
 
@@ -197,20 +215,7 @@ window.open("https://wa.me/917276057489?text="+encodeURIComponent(msg))
 
 }
 
-function sendEnquiry(){
 
-let name=document.getElementById("ename").value
-let phone=document.getElementById("ephone").value
-let msg=document.getElementById("emsg").value
-
-let text="New Website Enquiry%0A"+
-"Name: "+name+
-"%0APhone: "+phone+
-"%0AMessage: "+msg
-
-window.open("https://wa.me/917276057489?text="+text)
-
-}
 
 function searchProduct(){
 
