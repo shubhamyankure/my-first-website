@@ -2,46 +2,159 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Payment</title>
+<meta charset="UTF-8">
+<title>Electronics Store</title>
 
 <style>
 
 body{
 font-family:Arial;
-background:#020617;
+background:#0f172a;
 color:white;
+margin:0;
+}
+
+header{
+background:#1d4ed8;
+padding:20px;
 text-align:center;
-padding:30px;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+text-align:center;
 }
 
 button{
 background:#22c55e;
 border:none;
-padding:10px 16px;
+padding:8px 12px;
 color:white;
 border-radius:6px;
 cursor:pointer;
-margin-top:10px;
+margin-top:5px;
 }
 
-input{
+button:hover{
+background:#16a34a;
+}
+
+input,textarea{
+width:100%;
 padding:8px;
-width:250px;
+margin:5px 0;
 border-radius:5px;
 border:none;
-margin-top:10px;
+}
+
+#loginBox{
+max-width:300px;
+margin:auto;
+margin-top:80px;
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+}
+
+#store{display:none;}
+#paymentPage{display:none;}
+
+#cart{
+background:#020617;
+padding:20px;
+margin:20px;
+border-radius:10px;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h1>Complete Your Payment</h1>
+<div id="loginBox">
 
-<h3 id="order"></h3>
+<h2>User Login</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<div id="store">
+
+<header>
+<h1>Electronics Component Store</h1>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h3>1K Resistor Pack</h3>
+<p>10 pcs resistor</p>
+<p>₹10</p>
+<button onclick="add('1K Resistor Pack',10)">Add</button>
+</div>
+
+<div class="card">
+<h3>Line Following Robot</h3>
+<p>₹1200</p>
+<button onclick="add('Line Robot',1200)">Add</button>
+</div>
+
+<div class="card">
+<h3>Bluetooth Automation</h3>
+<p>₹1800</p>
+<button onclick="add('Bluetooth Automation',1800)">Add</button>
+</div>
+
+</div>
+
+<div id="cart">
+
+<h2>Cart</h2>
+
+<ul id="list"></ul>
+
+<h3>Total ₹<span id="total">0</span></h3>
+
+<h3>Customer Details</h3>
+
+<input id="name" placeholder="Name">
+
+<input id="phone"
+type="tel"
+maxlength="10"
+placeholder="Phone Number"
+oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+<textarea id="address" placeholder="Address"></textarea>
+
+<br>
+
+<button onclick="goPayment()">Proceed to Payment</button>
+
+</div>
+
+</div>
+
+<div id="paymentPage">
+
+<header>
+<h1>Payment</h1>
+</header>
+
+<h2 id="orderText"></h2>
 
 <img id="qr" width="220">
 
@@ -51,57 +164,152 @@ margin-top:10px;
 
 <h3>After Payment</h3>
 
-<p>Enter your UPI Transaction ID</p>
-
-<input id="txid" placeholder="Transaction ID">
+<input id="txid" placeholder="Enter UPI Transaction ID">
 
 <br>
 
 <button onclick="confirmPayment()">Confirm Payment</button>
 
+</div>
+
 <script>
 
-let data=JSON.parse(localStorage.getItem("order"))
+let cart=[]
+let orderID=""
 
-let orderID="ORD-"+Math.floor(Math.random()*999999)
+function login(){
 
-document.getElementById("order").innerText="Order ID: "+orderID+" | Total ₹"+data.total
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
 
-let upi="upi://pay?pa=7276057489@ybl&pn=ElectronicsStore&tn="+orderID+"&am="+data.total+"&cu=INR"
+if(u.length>0 && p.length>0){
+
+document.getElementById("loginBox").style.display="none"
+document.getElementById("store").style.display="block"
+
+}
+
+}
+
+function add(name,price){
+
+let item=cart.find(i=>i.name==name)
+
+if(item){
+item.qty++
+}else{
+cart.push({name,price,qty:1})
+}
+
+render()
+
+}
+
+function changeQty(i,d){
+
+cart[i].qty+=d
+
+if(cart[i].qty<=0){
+cart.splice(i,1)
+}
+
+render()
+
+}
+
+function removeItem(i){
+cart.splice(i,1)
+render()
+}
+
+function render(){
+
+let list=document.getElementById("list")
+list.innerHTML=""
+
+let total=0
+
+cart.forEach((item,i)=>{
+
+let li=document.createElement("li")
+
+li.innerHTML=
+item.name+" x"+item.qty+
+" ₹"+(item.price*item.qty)+
+` <button onclick="changeQty(${i},1)">+</button>
+<button onclick="changeQty(${i},-1)">-</button>
+<button onclick="removeItem(${i})">Remove</button>`
+
+list.appendChild(li)
+
+total+=item.price*item.qty
+
+})
+
+document.getElementById("total").innerText=total
+
+}
+
+function goPayment(){
+
+document.getElementById("store").style.display="none"
+document.getElementById("paymentPage").style.display="block"
+
+let total=document.getElementById("total").innerText
+
+orderID="ORD-"+Math.floor(Math.random()*999999)
+
+document.getElementById("orderText").innerText="Order ID: "+orderID+" | Total ₹"+total
+
+generateQR(total)
+
+}
+
+function generateQR(amount){
+
+let upi="upi://pay?pa=7276057489@ybl&pn=ElectronicsStore&tn="+orderID+"&am="+amount+"&cu=INR"
 
 let qr="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(upi)
 
 document.getElementById("qr").src=qr
 
-
-function payUPI(){
-window.location.href=upi
 }
 
+function payUPI(){
+
+let total=document.getElementById("total").innerText
+
+let upi="upi://pay?pa=7276057489@ybl&pn=ElectronicsStore&tn="+orderID+"&am="+total+"&cu=INR"
+
+window.location.href=upi
+
+}
 
 function confirmPayment(){
 
 let tx=document.getElementById("txid").value
 
 if(tx.length<5){
-
 alert("Enter valid transaction ID")
-
 return
-
 }
+
+let name=document.getElementById("name").value
+let phone=document.getElementById("phone").value
+let address=document.getElementById("address").value
+let total=document.getElementById("total").innerText
 
 let msg="Payment Confirmation%0A"+
 "Order ID:"+orderID+
 "%0ATransaction ID:"+tx+
-"%0ATotal ₹"+data.total+
-"%0AName:"+data.name+
-"%0APhone:"+data.phone+
-"%0AAddress:"+data.address
+"%0ATotal ₹"+total+
+"%0AName:"+name+
+"%0APhone:"+phone+
+"%0AAddress:"+address
 
 window.open("https://wa.me/917276057489?text="+msg)
 
-alert("Order sent to seller for verification")
+alert("Order sent for verification")
 
 }
 
