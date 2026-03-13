@@ -1,13 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My First Website</title>
+<title>ElectroProjects Store</title>
+
+<style>
+
+body{
+font-family: Arial;
+background-color:#f2f2f2;
+margin:0;
+}
+
+header{
+background:#1f2937;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+margin:20px;
+}
+
+.card{
+background:white;
+width:250px;
+margin:15px;
+padding:15px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+.price{
+color:green;
+font-size:20px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px 15px;
+cursor:pointer;
+border-radius:5px;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>Hello World</h1>
-<p>This is my first website.</p>
+<header>
+<h1>Electronic Projects Store</h1>
+<p>Buy Electronics Projects for Students</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<img src="https://via.placeholder.com/250">
+<h3>Metal Sorting Machine</h3>
+<p>Inductive sensor based metal detector with robotic arm.</p>
+<p class="price">₹2500</p>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/250">
+<h3>Smart Wheelchair</h3>
+<p>Wheelchair with MAX30100 health monitoring.</p>
+<p class="price">₹4500</p>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/250">
+<h3>Bluetooth Home Automation</h3>
+<p>Control appliances using mobile Bluetooth.</p>
+<p class="price">₹1800</p>
+<button>Buy Now</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/250">
+<h3>Line Following Robot</h3>
+<p>Autonomous robot using IR sensors.</p>
+<p class="price">₹1200</p>
+<button>Buy Now</button>
+</div>
+
+</div>
 
 </body>
 </html>
