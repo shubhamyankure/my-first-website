@@ -2,268 +2,106 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Electronics Component Store</title>
+
+<title>Payment</title>
 
 <style>
 
 body{
 font-family:Arial;
-background:#111827;
+background:#020617;
 color:white;
-margin:0;
-}
-
-header{
-background:linear-gradient(45deg,#2563eb,#22c55e);
 text-align:center;
-padding:20px;
-}
-
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.card{
-background:#1f2937;
-padding:15px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 0 10px black;
-}
-
-.price{
-color:#22c55e;
-font-weight:bold;
+padding:30px;
 }
 
 button{
-background:#2563eb;
+background:#22c55e;
+border:none;
+padding:10px 16px;
 color:white;
-border:none;
-padding:8px 12px;
-border-radius:5px;
+border-radius:6px;
 cursor:pointer;
+margin-top:10px;
 }
 
-button:hover{
-background:#1d4ed8;
-}
-
-#cart{
-background:#020617;
-padding:20px;
-margin:20px;
-border-radius:10px;
-}
-
-input,textarea{
-width:100%;
+input{
 padding:8px;
-margin:5px 0;
+width:250px;
 border-radius:5px;
 border:none;
-}
-
-.cartItem button{
-margin-left:5px;
+margin-top:10px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header>
-<h1>Electronics Component Store</h1>
-<p>Projects & Components</p>
-</header>
+<h1>Complete Your Payment</h1>
 
-<div class="container">
+<h3 id="order"></h3>
 
-<div class="card">
-<h3>1K Resistor Pack</h3>
-<p>10 pcs resistor</p>
-<p class="price">₹10</p>
-<button onclick="add('1K Resistor Pack',10)">Add</button>
-</div>
+<img id="qr" width="220">
 
-<div class="card">
-<h3>Line Following Robot</h3>
-<p>IR sensor robot</p>
-<p class="price">₹1200</p>
-<button onclick="add('Line Following Robot',1200)">Add</button>
-</div>
+<br><br>
 
-<div class="card">
-<h3>Bluetooth Home Automation</h3>
-<p>Control appliances</p>
-<p class="price">₹1800</p>
-<button onclick="add('Bluetooth Automation',1800)">Add</button>
-</div>
+<button onclick="payUPI()">Open UPI App</button>
 
-</div>
+<h3>After Payment</h3>
 
-<div id="cart">
+<p>Enter your UPI Transaction ID</p>
 
-<h2>Cart</h2>
-
-<ul id="list"></ul>
-
-<h3>Total ₹<span id="total">0</span></h3>
-
-<h3>Customer Details</h3>
-
-<input id="name" placeholder="Name">
-
-<input id="phone"
-type="tel"
-placeholder="Phone Number"
-maxlength="10"
-oninput="this.value=this.value.replace(/[^0-9]/g,'')">
-
-<textarea id="address" placeholder="Address"></textarea>
+<input id="txid" placeholder="Transaction ID">
 
 <br>
 
-<button onclick="payUPI()">Pay with UPI</button>
-
-<div style="margin-top:15px;text-align:center">
-<h3>Scan QR (Desktop Users)</h3>
-<img id="upiQR" width="200">
-</div>
-
-<br>
-
-<button onclick="sendWA()">Order via WhatsApp</button>
-
-</div>
+<button onclick="confirmPayment()">Confirm Payment</button>
 
 <script>
 
-let cart=[]
+let data=JSON.parse(localStorage.getItem("order"))
 
-function generateOrderID(){
-let r=Math.floor(Math.random()*9000)+1000
-let d=new Date()
-return "ORD-"+d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+"-"+r
-}
+let orderID="ORD-"+Math.floor(Math.random()*999999)
 
-function add(name,price){
+document.getElementById("order").innerText="Order ID: "+orderID+" | Total ₹"+data.total
 
-let item=cart.find(i=>i.name==name)
+let upi="upi://pay?pa=7276057489@ybl&pn=ElectronicsStore&tn="+orderID+"&am="+data.total+"&cu=INR"
 
-if(item){
-item.qty++
-}else{
-cart.push({name:name,price:price,qty:1})
-}
+let qr="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(upi)
 
-renderCart()
+document.getElementById("qr").src=qr
 
-}
-
-function changeQty(i,delta){
-
-cart[i].qty+=delta
-
-if(cart[i].qty<=0){
-cart.splice(i,1)
-}
-
-renderCart()
-
-}
-
-function removeItem(i){
-cart.splice(i,1)
-renderCart()
-}
-
-function renderCart(){
-
-let list=document.getElementById("list")
-list.innerHTML=""
-
-let total=0
-
-cart.forEach((item,i)=>{
-
-let li=document.createElement("li")
-
-li.className="cartItem"
-
-li.innerHTML=
-item.name+" ₹"+item.price+
-" x "+item.qty+
-" = ₹"+(item.price*item.qty)+
-` <button onclick="changeQty(${i},1)">+</button>
-<button onclick="changeQty(${i},-1)">-</button>
-<button onclick="removeItem(${i})">Remove</button>`
-
-list.appendChild(li)
-
-total+=item.price*item.qty
-
-})
-
-document.getElementById("total").innerText=total
-
-generateQR(total)
-
-}
-
-function generateQR(amount){
-
-let upi="upi://pay?pa=7276057489@ybl&pn=ElectronicsStore&am="+amount+"&cu=INR"
-
-let qr="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+encodeURIComponent(upi)
-
-document.getElementById("upiQR").src=qr
-
-}
 
 function payUPI(){
-
-let total=document.getElementById("total").innerText
-
-let orderID=generateOrderID()
-
-alert("Order ID: "+orderID)
-
-let upi="upi://pay?pa=7276057489@ybl&pn=ElectronicsStore&tn="+orderID+"&am="+total+"&cu=INR"
-
-if(/Android|iPhone/i.test(navigator.userAgent)){
 window.location.href=upi
-}else{
-generateQR(total)
 }
 
+
+function confirmPayment(){
+
+let tx=document.getElementById("txid").value
+
+if(tx.length<5){
+
+alert("Enter valid transaction ID")
+
+return
+
 }
 
-function sendWA(){
-
-let name=document.getElementById("name").value
-let phone=document.getElementById("phone").value
-let address=document.getElementById("address").value
-
-let orderID=generateOrderID()
-
-let msg="Order ID:"+orderID+"%0A"
-
-cart.forEach(i=>{
-msg+=i.name+" x"+i.qty+" ₹"+(i.price*i.qty)+"%0A"
-})
-
-msg+="Total ₹"+document.getElementById("total").innerText
-msg+="%0AName:"+name
-msg+="%0APhone:"+phone
-msg+="%0AAddress:"+address
+let msg="Payment Confirmation%0A"+
+"Order ID:"+orderID+
+"%0ATransaction ID:"+tx+
+"%0ATotal ₹"+data.total+
+"%0AName:"+data.name+
+"%0APhone:"+data.phone+
+"%0AAddress:"+data.address
 
 window.open("https://wa.me/917276057489?text="+msg)
+
+alert("Order sent to seller for verification")
 
 }
 
