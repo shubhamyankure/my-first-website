@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Electronics Components Store</title>
+<title>Electronics Component Store</title>
 
 <style>
 
@@ -20,10 +20,6 @@ padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-}
-
-header h1{
-margin:0;
 }
 
 #search{
@@ -66,6 +62,7 @@ border:none;
 padding:8px 12px;
 border-radius:5px;
 cursor:pointer;
+margin-top:5px;
 }
 
 button:hover{
@@ -89,6 +86,21 @@ border-bottom:1px solid gray;
 padding:8px 0;
 }
 
+#enquiry{
+background:white;
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
+
+input,textarea{
+width:100%;
+padding:8px;
+margin:5px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
 </style>
 </head>
 
@@ -110,6 +122,7 @@ padding:8px 0;
 <p>10 pcs</p>
 <p class="price">₹10</p>
 <button onclick="add('1K Resistor Pack',10)">Add to Cart</button>
+<button onclick="getInfo('1K Resistor Pack')">Get Info</button>
 </div>
 
 <div class="card" data-name="arduino">
@@ -117,6 +130,7 @@ padding:8px 0;
 <h3>Arduino UNO</h3>
 <p class="price">₹350</p>
 <button onclick="add('Arduino UNO',350)">Add to Cart</button>
+<button onclick="getInfo('Arduino UNO')">Get Info</button>
 </div>
 
 <div class="card" data-name="sensor">
@@ -124,6 +138,7 @@ padding:8px 0;
 <h3>Ultrasonic Sensor</h3>
 <p class="price">₹80</p>
 <button onclick="add('Ultrasonic Sensor',80)">Add to Cart</button>
+<button onclick="getInfo('Ultrasonic Sensor')">Get Info</button>
 </div>
 
 <div class="card" data-name="motor">
@@ -131,6 +146,7 @@ padding:8px 0;
 <h3>DC Motor</h3>
 <p class="price">₹120</p>
 <button onclick="add('DC Motor',120)">Add to Cart</button>
+<button onclick="getInfo('DC Motor')">Get Info</button>
 </div>
 
 </div>
@@ -143,7 +159,23 @@ padding:8px 0;
 
 <h3>Total ₹<span id="total">0</span></h3>
 
-<button onclick="sendOrder()">Order via WhatsApp</button>
+</div>
+
+<div id="enquiry">
+
+<h2>Website Enquiry</h2>
+
+<input id="ename" placeholder="Your Name">
+
+<input id="ephone"
+type="tel"
+maxlength="10"
+placeholder="Phone Number"
+oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+<textarea id="emsg" placeholder="Your enquiry"></textarea>
+
+<button onclick="sendEnquiry()">Send Enquiry</button>
 
 </div>
 
@@ -211,17 +243,26 @@ c.style.display="none"
 
 }
 
-function sendOrder(){
+function getInfo(product){
 
-let msg="Electronics Order%0A"
+let msg="Hello, I want information about "+product
 
-cart.forEach(i=>{
-msg+=i.name+" x"+i.qty+" ₹"+(i.price*i.qty)+"%0A"
-})
+window.open("https://wa.me/917276057489?text="+encodeURIComponent(msg))
 
-msg+="Total ₹"+document.getElementById("total").innerText
+}
 
-window.open("https://wa.me/917276057489?text="+msg)
+function sendEnquiry(){
+
+let name=document.getElementById("ename").value
+let phone=document.getElementById("ephone").value
+let msg=document.getElementById("emsg").value
+
+let text="New Website Enquiry%0A"+
+"Name: "+name+
+"%0APhone: "+phone+
+"%0AMessage: "+msg
+
+window.open("https://wa.me/917276057489?text="+text)
 
 }
 
