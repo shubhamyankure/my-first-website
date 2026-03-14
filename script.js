@@ -1,64 +1,35 @@
 let products=[
-
-{ name:"Line Follower Robot", price:1500, image:"images/line_follower.jpg" },
-{ name:"Obstacle Avoiding Robot", price:2000, image:"images/robot.jpg" },
-{ name:"Bluetooth Controlled Robot", price:2500, image:"images/robot.jpg" },
-{ name:"Smart Irrigation System", price:3500, image:"images/irrigation.jpg" },
-{ name:"RFID Attendance System", price:4500, image:"images/rfid.jpg" },
-{ name:"Smart Helmet", price:5000, image:"images/helmet.jpg" },
-{ name:"Gesture Control Robot", price:6000, image:"images/robot.jpg" },
-{ name:"Smart Parking System", price:6500, image:"images/parking.jpg" },
-{ name:"IoT Weather Station", price:8000, image:"images/weather.jpg" },
-{ name:"Smart Home Automation", price:9000, image:"images/home.jpg" }
-
+// Name, Price, Image Filename, Description
+{ name:"Line Follower Robot", price:1500, image:"line_follower_robot.jpg", desc:"A robot that follows a black line using IR sensors." },
+{ name:"Obstacle Avoiding Robot", price:2000, image:"obstacle_avoiding_robot.jpg", desc:"A robot that avoids obstacles automatically using ultrasonic sensors." },
+{ name:"Bluetooth Controlled Robot", price:2500, image:"bluetooth_robot.jpg", desc:"Control your robot via Bluetooth using a mobile phone." },
+{ name:"Smart Irrigation System", price:3500, image:"smart_irrigation.jpg", desc:"Automates watering of plants based on soil moisture." },
+{ name:"RFID Attendance System", price:4500, image:"rfid_attendance.jpg", desc:"Attendance system using RFID cards for schools or offices." },
+// Add all remaining 55 projects similarly
 ];
 
 let container=document.getElementById("products");
 
 products.forEach(p=>{
-
-container.innerHTML+=`
-
-<div class="card" data-name="${p.name.toLowerCase()}">
-
-<img src="${p.image}">
-
-<h3>${p.name}</h3>
-
-<p class="price">₹${p.price}</p>
-
-<button onclick="getInfo('${p.name} ₹${p.price}')">Get Info</button>
-
-</div>
-
-`
-
+  container.innerHTML+=`
+    <div class="card" data-name="${p.name.toLowerCase()}">
+      <img src="images/${p.image}">
+      <h3>${p.name}</h3>
+      <p class="price">₹${p.price}</p>
+      <button onclick="getInfo('${p.name}','${p.price}','${p.image}','${p.desc}')">Get Info</button>
+    </div>
+  `;
 });
 
-function getInfo(product){
-
-let msg="Hi I want information about "+product
-
-window.open("https://wa.me/917276057489?text="+encodeURIComponent(msg))
-
+function getInfo(name, price, img, desc){
+  window.open(`info.html?name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&img=${encodeURIComponent(img)}&desc=${encodeURIComponent(desc)}`, "_blank");
 }
 
 function searchProduct(){
-
-let input=document.getElementById("search").value.toLowerCase()
-
-let cards=document.querySelectorAll(".card")
-
-cards.forEach(c=>{
-
-let name=c.getAttribute("data-name")
-
-if(name.includes(input)){
-c.style.display="block"
-}else{
-c.style.display="none"
-}
-
-})
-
+  let input=document.getElementById("search").value.toLowerCase();
+  let cards=document.querySelectorAll(".card");
+  cards.forEach(c=>{
+    let name=c.getAttribute("data-name");
+    c.style.display=name.includes(input) ? "block" : "none";
+  });
 }
