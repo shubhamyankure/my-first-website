@@ -2,80 +2,11 @@
 
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Arduino Project Store</title>
 
-<style>
-
-body{
-font-family:Arial;
-background:#f4f6f9;
-margin:0;
-}
-
-nav{
-background:#111827;
-color:white;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.search{
-padding:8px;
-border-radius:6px;
-border:none;
-}
-
-.container{
-padding:30px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.card{
-background:white;
-padding:15px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-}
-
-.card img{
-width:100%;
-height:140px;
-object-fit:cover;
-border-radius:6px;
-}
-
-.price{
-color:green;
-font-weight:bold;
-}
-
-button{
-background:#2563eb;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:6px;
-cursor:pointer;
-}
-
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:12px 16px;
-border-radius:40px;
-text-decoration:none;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -83,126 +14,19 @@ text-decoration:none;
 
 <nav>
 
-<h2>Arduino Projects</h2>
+<h2>Arduino Projects Store</h2>
 
-<input id="search" class="search" placeholder="Search project..." onkeyup="searchProduct()">
+<input id="search" placeholder="Search project..." onkeyup="searchProduct()">
 
 </nav>
 
-<div class="container">
-
-<script>
-
-let projects=[
-["Line Follower Robot",1500],
-["Obstacle Avoiding Robot",2000],
-["Bluetooth Controlled Robot",2500],
-["Smart Irrigation System",3500],
-["RFID Attendance System",4500],
-["Smart Helmet",5000],
-["Gesture Control Robot",6000],
-["Smart Parking System",6500],
-["IoT Weather Station",8000],
-["Smart Home Automation",9000],
-["GPS Vehicle Tracker",10000],
-["Robotic Arm",12000],
-["Smart Wheelchair",15000],
-["Metal Sorting System",18000],
-["Delivery Robot",20000],
-["Automatic Plant Watering",3000],
-["Fire Alarm System",1500],
-["Gas Leakage Detector",2000],
-["Ultrasonic Distance Meter",1200],
-["Digital Thermometer",1000],
-["Motion Detection Alarm",1500],
-["Automatic Night Lamp",1000],
-["Voice Controlled Home",5000],
-["Smart Dustbin",3000],
-["Parking Sensor",1500],
-["Digital Clock",1200],
-["Smart Energy Meter",4500],
-["Fingerprint Door Lock",6000],
-["IoT Air Pollution Monitor",8000],
-["Solar Tracking System",7000],
-["Water Level Indicator",1000],
-["Smart Traffic Light",3000],
-["Clap Switch",1000],
-["RF Controlled Robot",3500],
-["Wireless Weather Station",7000],
-["IoT Smart Farming",9000],
-["Smart Pet Feeder",6000],
-["Home Security System",5000],
-["Smart Street Light",7000],
-["Automatic Toll System",8000],
-["RFID Door Lock",4000],
-["Smart Greenhouse",10000],
-["IoT Flood Monitor",12000],
-["AI Obstacle Robot",15000],
-["Industrial Conveyor Automation",18000],
-["Smart Energy Management",9000],
-["Hospital Patient Monitor",15000],
-["Disaster Monitoring System",16000],
-["Warehouse Robot",17000],
-["Autonomous Vacuum Robot",14000],
-["Voice Robot Assistant",11000],
-["Gesture Drone Controller",12000],
-["IoT Smart Meter",8000],
-["Smart Agriculture Monitor",9000],
-["Robot Security Patrol",15000],
-["Digital Oscilloscope",6000],
-["Arduino CNC Plotter",10000],
-["Smart Garbage Monitoring",7000],
-["Wireless Robot Camera",9000],
-["Automatic Metal Detector",5000]
-]
-
-let container=document.querySelector(".container")
-
-projects.forEach(p=>{
-container.innerHTML+=`
-<div class="card" data-name="${p[0].toLowerCase()}">
-<img src="https://source.unsplash.com/400x300/?electronics,robot">
-<h3>${p[0]}</h3>
-<p class="price">₹${p[1]}</p>
-<button onclick="getInfo('${p[0]} ₹${p[1]}')">Get Info</button>
-</div>`
-})
-
-function getInfo(product){
-
-let msg="Hi I want information about "+product
-
-window.open("https://wa.me/917276057489?text="+encodeURIComponent(msg))
-
-}
-
-function searchProduct(){
-
-let input=document.getElementById("search").value.toLowerCase()
-
-let cards=document.querySelectorAll(".card")
-
-cards.forEach(c=>{
-
-let name=c.getAttribute("data-name")
-
-if(name.includes(input)){
-c.style.display="block"
-}else{
-c.style.display="none"
-}
-
-})
-
-}
-
-</script>
-
-</div>
+<div class="container" id="products"></div>
 
 <a class="whatsapp" href="https://wa.me/917276057489?text=Hi" target="_blank">
 Chat on WhatsApp
 </a>
+
+<script src="script.js"></script>
 
 </body>
 </html>
