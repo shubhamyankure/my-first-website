@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Project Info</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container" id="info-container">
+  <h2 id="project-name"></h2>
+  <img id="project-img" src="" style="width:300px;height:auto;">
+  <p class="price" id="project-price"></p>
+  <p id="project-description" style="margin-top:15px;"></p>
+  <a href="index.html">← Back to Store</a>
+</div>
+
+<script>
+let params = new URLSearchParams(window.location.search);
+document.getElementById("project-name").innerText = params.get("name");
+document.getElementById("project-price").innerText = "Price: ₹" + params.get("price");
+document.getElementById("project-img").src = "images/" + params.get("img");
+document.getElementById("project-description").innerText = params.get("desc");
+</script>
+</body>
+</html>
