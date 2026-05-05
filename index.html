@@ -3,238 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CircuitNest Projects</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>CircuitNest Projects</title>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
 body{
-background:#0f1115;
-color:white;
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
 }
-
-/* NAVBAR */
 
 header{
-background:#131921;
-padding:15px 30px;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-flex-wrap:wrap;
+  padding:15px 30px;
+  background:#111827;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .logo{
-font-size:28px;
-font-weight:700;
-color:#ff9900;
+  font-size:28px;
+  font-weight:bold;
+  color:#60a5fa;
 }
 
-.search-box{
-flex:1;
-display:flex;
-max-width:600px;
+nav button{
+  margin-left:10px;
+  padding:10px 16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-.search-box input{
-width:100%;
-padding:12px;
-border:none;
-outline:none;
-font-size:16px;
-border-radius:5px 0 0 5px;
+.login-btn{
+  background:#2563eb;
+  color:white;
 }
 
-.search-box button{
-padding:12px 20px;
-border:none;
-background:#ff9900;
-font-weight:600;
-cursor:pointer;
-border-radius:0 5px 5px 0;
+.signup-btn{
+  background:#16a34a;
+  color:white;
 }
-
-.nav-buttons{
-display:flex;
-gap:10px;
-align-items:center;
-}
-
-.nav-buttons button{
-padding:10px 18px;
-border:none;
-background:#ff9900;
-color:black;
-font-weight:600;
-border-radius:5px;
-cursor:pointer;
-}
-
-#welcomeUser{
-font-size:14px;
-color:#ffcc80;
-}
-
-/* HERO */
 
 .hero{
-padding:60px 30px;
-text-align:center;
-background:linear-gradient(to right,#111827,#1f2937);
+  text-align:center;
+  padding:60px 20px;
 }
 
 .hero h1{
-font-size:50px;
-margin-bottom:20px;
+  font-size:48px;
+  margin-bottom:15px;
 }
 
 .hero p{
-font-size:18px;
-color:#d1d5db;
-max-width:800px;
-margin:auto;
-}
-
-/* PRODUCTS */
-
-.section-title{
-padding:30px;
-font-size:35px;
-font-weight:700;
+  color:#cbd5e1;
+  max-width:700px;
+  margin:auto;
 }
 
 .products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-padding:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  padding:40px;
 }
 
 .card{
-background:#1a1d24;
-border-radius:12px;
-overflow:hidden;
-transition:0.3s;
-border:1px solid #2b2f36;
-}
-
-.card:hover{
-transform:translateY(-5px);
+  background:#1e293b;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 0 10px rgba(0,0,0,0.3);
 }
 
 .card img{
-width:100%;
-height:220px;
-object-fit:cover;
+  width:100%;
+  height:200px;
+  object-fit:cover;
 }
 
 .card-content{
-padding:20px;
+  padding:20px;
 }
 
-.card-content h3{
-font-size:20px;
-margin-bottom:10px;
-}
-
-.card-content p{
-font-size:14px;
-color:#cbd5e1;
-margin-bottom:15px;
+.card h2{
+  margin-top:0;
 }
 
 .price{
-font-size:24px;
-font-weight:700;
-color:#ff9900;
-margin-bottom:15px;
+  color:#fbbf24;
+  font-size:22px;
+  font-weight:bold;
 }
 
 .buy-btn{
-width:100%;
-padding:12px;
-border:none;
-background:#ff9900;
-font-weight:700;
-cursor:pointer;
-border-radius:6px;
+  width:100%;
+  padding:12px;
+  background:#2563eb;
+  border:none;
+  border-radius:10px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:15px;
 }
-
-/* MODAL */
 
 .modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-justify-content:center;
-align-items:center;
-z-index:2000;
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
 }
 
-.modal-content{
-background:#1f2937;
-padding:30px;
-border-radius:10px;
-width:90%;
-max-width:400px;
+.modal-box{
+  background:#1e293b;
+  padding:25px;
+  border-radius:15px;
+  width:90%;
+  max-width:400px;
 }
 
-.modal-content h2{
-margin-bottom:20px;
+.modal-box h2{
+  margin-top:0;
 }
 
-.modal-content input{
-width:100%;
-padding:12px;
-margin-bottom:15px;
-border:none;
-border-radius:5px;
-outline:none;
+.modal-box input{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border:none;
+  border-radius:8px;
 }
 
-.modal-content button{
-width:100%;
-padding:12px;
-border:none;
-background:#ff9900;
-font-weight:700;
-cursor:pointer;
-border-radius:5px;
-margin-top:10px;
+.modal-box button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
-.close-btn{
-background:red !important;
-color:white;
+.close{
+  margin-top:10px;
+  background:#dc2626 !important;
 }
 
-/* FOOTER */
-
-footer{
-background:#131921;
-padding:25px;
-text-align:center;
-margin-top:50px;
-color:#cbd5e1;
+#welcomeUser{
+  text-align:center;
+  margin-top:15px;
+  font-size:20px;
+  color:#4ade80;
 }
 
 </style>
@@ -244,150 +170,126 @@ color:#cbd5e1;
 
 <header>
 
-<div class="navbar">
-
 <div class="logo">
 CircuitNest
 </div>
 
-<div class="search-box">
-<input type="text" placeholder="Search electronics projects...">
-<button>Search</button>
-</div>
+<nav>
 
-<div class="nav-buttons">
+<button class="login-btn" onclick="openLogin()">
+Login
+</button>
 
-<div id="welcomeUser"></div>
+<button class="signup-btn" onclick="openSignup()">
+Signup
+</button>
 
-<button onclick="openLogin()">Login</button>
-
-<button onclick="openSignup()">Signup</button>
-
-</div>
-
-</div>
+</nav>
 
 </header>
+
+<div id="welcomeUser"></div>
 
 <section class="hero">
 
 <h1>Electronics Projects Store</h1>
 
 <p>
-Buy final year electronics, IoT, embedded, robotics and automation projects with code, report and circuit diagrams.
+Buy final year electronics projects with code,
+report, circuit diagram and full support.
 </p>
 
 </section>
 
-<h2 class="section-title">
-Featured Projects
-</h2>
-
-<div class="products">
+<section class="products">
 
 <div class="card">
+
 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80">
 
 <div class="card-content">
-<h3>IoT Home Automation</h3>
 
-<p>
-ESP32 based smart home automation using mobile app and sensors.
-</p>
+<h2>IoT Health Monitoring</h2>
 
 <div class="price">
-₹5,999
+₹6999
 </div>
 
-<button class="buy-btn">
+<button class="buy-btn"
+onclick="buyProject('IoT Health Monitoring')">
 Buy Now
 </button>
 
 </div>
+
 </div>
 
 <div class="card">
+
 <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1000&q=80">
 
 <div class="card-content">
-<h3>Robotic Arm Project</h3>
 
-<p>
-Industrial robotic arm with wireless control and automation.
-</p>
+<h2>RFID Smart Parking</h2>
 
 <div class="price">
-₹8,499
+₹5999
 </div>
 
-<button class="buy-btn">
+<button class="buy-btn"
+onclick="buyProject('RFID Smart Parking')">
 Buy Now
 </button>
 
 </div>
+
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1000&q=80">
+
+<img src="https://images.unsplash.com/photo-1563770660941-10a63607668e?auto=format&fit=crop&w=1000&q=80">
 
 <div class="card-content">
-<h3>RFID Security System</h3>
 
-<p>
-RFID based smart door lock and access control system.
-</p>
+<h2>Voice Controlled Robot</h2>
 
 <div class="price">
-₹4,999
+₹8999
 </div>
 
-<button class="buy-btn">
+<button class="buy-btn"
+onclick="buyProject('Voice Controlled Robot')">
 Buy Now
 </button>
 
 </div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1000&q=80">
-
-<div class="card-content">
-<h3>Solar Power Monitoring</h3>
-
-<p>
-Smart solar energy tracking and monitoring system project.
-</p>
-
-<div class="price">
-₹7,999
-</div>
-
-<button class="buy-btn">
-Buy Now
-</button>
 
 </div>
-</div>
 
-</div>
+</section>
 
 <!-- LOGIN MODAL -->
 
 <div class="modal" id="loginModal">
 
-<div class="modal-content">
+<div class="modal-box">
 
 <h2>Login</h2>
 
-<input type="email" id="loginEmail" placeholder="Enter Email">
+<input type="email"
+id="loginEmail"
+placeholder="Email">
 
-<input type="password" id="loginPassword" placeholder="Enter Password">
+<input type="password"
+id="loginPassword"
+placeholder="Password">
 
 <button onclick="login()">
 Login
 </button>
 
-<button class="close-btn" onclick="closeModal('loginModal')">
+<button class="close"
+onclick="closeModal('loginModal')">
 Close
 </button>
 
@@ -399,21 +301,28 @@ Close
 
 <div class="modal" id="signupModal">
 
-<div class="modal-content">
+<div class="modal-box">
 
 <h2>Create Account</h2>
 
-<input type="text" id="signupName" placeholder="Full Name">
+<input type="text"
+id="signupName"
+placeholder="Full Name">
 
-<input type="email" id="signupEmail" placeholder="Email">
+<input type="email"
+id="signupEmail"
+placeholder="Email">
 
-<input type="password" id="signupPassword" placeholder="Password">
+<input type="password"
+id="signupPassword"
+placeholder="Password">
 
 <button onclick="signup()">
 Create Account
 </button>
 
-<button class="close-btn" onclick="closeModal('signupModal')">
+<button class="close"
+onclick="closeModal('signupModal')">
 Close
 </button>
 
@@ -421,41 +330,37 @@ Close
 
 </div>
 
-<footer>
-
-© 2026 CircuitNest Projects | All Rights Reserved
-
-</footer>
-
 <!-- FIREBASE -->
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-onAuthStateChanged,
-updateProfile
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  updateProfile
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyA8LFD1u_eU5tkEmKdnAwfa7Alvz_auxUs",
+  apiKey: "AIzaSyA8LFD1u_eU5tkEmKdnAwfa7Alvz_auxUs",
 
-authDomain: "first-website-ae38a.firebaseapp.com",
+  authDomain: "first-website-ae38a.firebaseapp.com",
 
-projectId: "first-website-ae38a",
+  projectId: "first-website-ae38a",
 
-storageBucket: "first-website-ae38a.firebasestorage.app",
+  storageBucket: "first-website-ae38a.firebasestorage.app",
 
-messagingSenderId: "263459878392",
+  messagingSenderId: "263459878392",
 
-appId: "1:263459878392:web:050584b3aafc0a4125520d",
+  appId: "1:263459878392:web:050584b3aafc0a4125520d",
 
-measurementId: "G-G1ZQYGXYMT"
+  measurementId: "G-G1ZQYGXYMT"
 
 };
 
@@ -465,102 +370,271 @@ const auth = getAuth(app);
 
 window.openSignup = function(){
 
-document.getElementById('signupModal').style.display='flex';
+  document.getElementById('signupModal').style.display='flex';
 
 }
 
 window.openLogin = function(){
 
-document.getElementById('loginModal').style.display='flex';
+  document.getElementById('loginModal').style.display='flex';
 
 }
 
 window.closeModal = function(id){
 
-document.getElementById(id).style.display='none';
+  document.getElementById(id).style.display='none';
 
 }
 
 window.signup = async function(){
 
-let name=document.getElementById('signupName').value;
+  let name =
+  document.getElementById('signupName').value;
 
-let email=document.getElementById('signupEmail').value;
+  let email =
+  document.getElementById('signupEmail').value;
 
-let password=document.getElementById('signupPassword').value;
+  let password =
+  document.getElementById('signupPassword').value;
 
-if(name=='' || email=='' || password==''){
+  try{
 
-alert('Please fill all fields');
+    const userCredential =
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-return;
+    await updateProfile(
+      userCredential.user,
+      {
+        displayName:name
+      }
+    );
 
-}
+    alert("Account Created");
 
-try{
+    closeModal('signupModal');
 
-const userCredential =
-await createUserWithEmailAndPassword(auth,email,password);
+  }catch(error){
 
-await updateProfile(userCredential.user,{
+    alert(error.message);
 
-displayName:name
-
-});
-
-alert('Account Created Successfully');
-
-closeModal('signupModal');
-
-location.reload();
-
-}catch(error){
-
-alert(error.message);
-
-}
+  }
 
 }
 
 window.login = async function(){
 
-let email=document.getElementById('loginEmail').value;
+  let email =
+  document.getElementById('loginEmail').value;
 
-let password=document.getElementById('loginPassword').value;
+  let password =
+  document.getElementById('loginPassword').value;
 
-try{
+  try{
 
-await signInWithEmailAndPassword(auth,email,password);
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-alert('Login Successful');
+    alert("Login Successful");
 
-location.reload();
+    closeModal('loginModal');
 
-}catch(error){
+  }catch(error){
 
-alert(error.message);
+    alert(error.message);
 
-}
+  }
 
 }
 
 onAuthStateChanged(auth,(user)=>{
 
-if(user){
+  if(user){
 
-document.getElementById('welcomeUser').innerHTML = `
-Welcome ${user.displayName || user.email}
-`;
+    document.getElementById('welcomeUser').innerHTML =
+    `Welcome ${user.displayName || user.email}`;
 
-}else{
+  }
 
-document.getElementById('welcomeUser').innerHTML = `
-Guest User
-`;
+});
+
+function generateOrderId(){
+
+  return "CN" + Date.now();
 
 }
 
-});
+window.buyProject = function(projectName){
+
+  const user = auth.currentUser;
+
+  if(!user){
+
+    alert("Please Login First");
+
+    openLogin();
+
+    return;
+
+  }
+
+  const orderId = generateOrderId();
+
+  const paymentHTML = `
+
+  <div id="paymentPopup"
+  style="
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  ">
+
+  <div style="
+  background:#1e293b;
+  padding:25px;
+  border-radius:15px;
+  width:90%;
+  max-width:400px;
+  ">
+
+  <h2>Complete Payment</h2>
+
+  <p><b>Project:</b> ${projectName}</p>
+
+  <p><b>Order ID:</b> ${orderId}</p>
+
+  <p><b>UPI ID:</b></p>
+
+  <div style="
+  background:#111827;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:15px;
+  ">
+  7276057489@superyes
+  </div>
+
+  <button onclick="copyUPI()"
+  style="
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  margin-bottom:10px;
+  ">
+  Copy UPI ID
+  </button>
+
+  <button onclick="sendOrder('${projectName}','${orderId}')"
+  style="
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#16a34a;
+  color:white;
+  margin-bottom:10px;
+  ">
+  I Have Paid
+  </button>
+
+  <button onclick="closePayment()"
+  style="
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#dc2626;
+  color:white;
+  ">
+  Cancel
+  </button>
+
+  </div>
+
+  </div>
+  `;
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    paymentHTML
+  );
+
+}
+
+window.copyUPI = function(){
+
+  navigator.clipboard.writeText(
+    "7276057489@superyes"
+  );
+
+  alert("UPI ID Copied");
+
+}
+
+window.closePayment = function(){
+
+  const popup =
+  document.getElementById("paymentPopup");
+
+  if(popup){
+
+    popup.remove();
+
+  }
+
+}
+
+window.sendOrder = function(projectName,orderId){
+
+  const user = auth.currentUser;
+
+  const email =
+  "sdyenkure_m25@et.vjti.ac.in";
+
+  const subject =
+  `New Project Order ${orderId}`;
+
+  const body =
+`New Order Received
+
+Project:
+${projectName}
+
+Order ID:
+${orderId}
+
+Customer:
+${user.displayName || "User"}
+
+Customer Email:
+${user.email}
+
+UPI:
+7276057489@superyes`;
+
+  const gmailLink =
+`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  window.open(gmailLink,"_blank");
+
+  alert("Order Sent");
+
+  closePayment();
+
+}
 
 </script>
 
