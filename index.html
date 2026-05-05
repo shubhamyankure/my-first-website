@@ -1,1108 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CircuitNest Projects</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #070b14;
-      --panel: rgba(15, 24, 38, 0.75);
-      --panel-soft: rgba(23, 34, 53, 0.82);
-      --text: #f3f7ff;
-      --muted: #9fb2cc;
-      --accent: #4da3ff;
-      --accent-dark: #2a7cdd;
-      --highlight: #ff9a4d;
-      --line: rgba(150, 173, 201, 0.25);
-      --glass: rgba(255, 255, 255, 0.06);
-      --shadow: 0 18px 38px rgba(1, 5, 14, 0.45);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "IBM Plex Sans", sans-serif;
-      background:
-        radial-gradient(circle at 10% 12%, rgba(77, 163, 255, 0.24) 0%, transparent 34%),
-        radial-gradient(circle at 85% 4%, rgba(255, 154, 77, 0.2) 0%, transparent 32%),
-        radial-gradient(circle at 58% 100%, rgba(77, 128, 255, 0.18) 0%, transparent 28%),
-        linear-gradient(180deg, #080d17 0%, #070b14 65%, #060a12 100%);
-      color: var(--text);
-      line-height: 1.45;
-      min-height: 100vh;
-    }
-
-    .wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .top-contact {
-      border-bottom: 1px solid rgba(182, 205, 232, 0.18);
-      background: rgba(8, 13, 23, 0.86);
-      backdrop-filter: blur(10px);
-    }
-
-    .top-contact-inner {
-      min-height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 0.88rem;
-      flex-wrap: wrap;
-      padding: 7px 0;
-    }
-
-    .top-contact a {
-      color: #d6e7ff;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .top-contact a:hover {
-      color: #ffffff;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(14px);
-      background: rgba(7, 11, 20, 0.66);
-      border-bottom: 1px solid rgba(182, 205, 232, 0.14);
-      z-index: 20;
-    }
-
-    .nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .brand {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.28rem;
-      font-weight: 700;
-      letter-spacing: 0;
-      color: var(--text);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(77, 163, 255, 0.9);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      padding: 7px 10px;
-      border-radius: 999px;
-      transition: color 0.2s ease, background-color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-      background: var(--glass);
-    }
-
-    .hero {
-      padding: 66px 0 38px;
-      display: grid;
-      gap: 24px;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2rem, 5vw, 3.45rem);
-      line-height: 1.02;
-      max-width: 14ch;
-    }
-
-    .hero p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 62ch;
-      font-size: 1.03rem;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding-top: 4px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 17px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 22px rgba(1, 7, 20, 0.3);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #66b6ff 0%, #4da3ff 50%, #2f88ef 100%);
-      color: #041a34;
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 12px 28px rgba(77, 163, 255, 0.34);
-    }
-
-    .btn-soft {
-      background: var(--panel-soft);
-      color: var(--text);
-      border: 1px solid rgba(183, 197, 217, 0.22);
-      backdrop-filter: blur(6px);
-    }
-
-    .hero-banner {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(183, 197, 217, 0.25);
-      min-height: 280px;
-      background: #0c141d;
-      position: relative;
-      box-shadow: var(--shadow);
-      animation: floatHero 7s ease-in-out infinite;
-    }
-
-    .hero-banner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(1.14) contrast(1.06);
-    }
-
-    .hero-banner .overlay {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 16px 18px;
-      background: linear-gradient(180deg, transparent 0%, rgba(8, 13, 24, 0.94) 78%);
-      color: #eef4ff;
-      font-weight: 600;
-      font-size: 0.94rem;
-    }
-
-    .section {
-      padding: 20px 0 36px;
-    }
-
-    .section h2 {
-      margin: 0 0 14px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.5rem;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .stat-card {
-      border: 1px solid rgba(183, 197, 217, 0.22);
-      border-radius: 10px;
-      background: rgba(20, 30, 45, 0.86);
-      color: var(--text);
-      padding: 10px 11px;
-      cursor: pointer;
-      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-      font: inherit;
-      text-align: left;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(77, 163, 255, 0.62);
-    }
-
-    .stat-card.active {
-      background: rgba(77, 163, 255, 0.16);
-      border-color: rgba(77, 163, 255, 0.82);
-    }
-
-    .stat-name {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 3px;
-    }
-
-    .stat-value {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.08rem;
-      font-weight: 700;
-      color: #ecf5ff;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .chip {
-      border: 1px solid rgba(183, 197, 217, 0.24);
-      border-radius: 999px;
-      background: rgba(21, 33, 48, 0.9);
-      color: var(--text);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 8px 13px;
-      cursor: pointer;
-      transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
-    }
-
-    .chip:hover {
-      transform: translateY(-1px);
-      border-color: rgba(77, 163, 255, 0.6);
-    }
-
-    .chip.active {
-      background: rgba(77, 163, 255, 0.22);
-      border-color: rgba(77, 163, 255, 0.85);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      transition: opacity 0.26s ease, transform 0.26s ease;
-    }
-
-    .grid.is-switching {
-      opacity: 0.45;
-      transform: translateY(6px);
-    }
-
-    .card {
-      border-radius: 12px;
-      border: 1px solid rgba(183, 197, 217, 0.22);
-      background: linear-gradient(180deg, rgba(27, 42, 62, 0.92) 0%, rgba(17, 27, 39, 0.96) 100%);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-      box-shadow: var(--shadow);
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 154, 77, 0.52);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-
-    .reveal.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card img {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-body {
-      padding: 14px;
-      display: grid;
-      gap: 9px;
-    }
-
-    .card h3 {
-      margin: 0;
-      font-size: 1rem;
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .price {
-      color: var(--highlight);
-      font-weight: 700;
-      font-size: 0.98rem;
-    }
-
-    .desc {
-      margin: 0;
-      color: #d2def0;
-      font-size: 0.89rem;
-    }
-
-    .contact {
-      margin-top: 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(183, 197, 217, 0.22);
-      background: var(--panel);
-      padding: 18px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-
-    .topic-list {
-      margin-top: 12px;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 9px 14px;
-    }
-
-    .topic-item {
-      border: 1px solid rgba(183, 197, 217, 0.22);
-      border-radius: 10px;
-      background: rgba(14, 23, 34, 0.84);
-      padding: 10px 11px;
-      font-size: 0.92rem;
-      color: #e2ecfb;
-    }
-
-    .review-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .review-card {
-      border: 1px solid rgba(183, 197, 217, 0.22);
-      border-radius: 12px;
-      background: rgba(16, 26, 40, 0.88);
-      padding: 13px;
-      box-shadow: var(--shadow);
-    }
-
-    .review-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 8px;
-      align-items: center;
-    }
-
-    .review-name {
-      margin: 0;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1rem;
-    }
-
-    .review-stars {
-      color: var(--highlight);
-      font-size: 0.9rem;
-      letter-spacing: 0;
-      margin: 0;
-    }
-
-    .review-text {
-      margin: 0;
-      color: #d2def0;
-      font-size: 0.9rem;
-    }
-
-    form {
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      padding: 11px 12px;
-      background: rgba(10, 17, 27, 0.9);
-      color: var(--text);
-      font: inherit;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: rgba(77, 163, 255, 0.75);
-      box-shadow: 0 0 0 3px rgba(77, 163, 255, 0.16);
-    }
-
-    textarea {
-      min-height: 94px;
-      resize: vertical;
-    }
-
-    footer {
-      border-top: 1px solid rgba(183, 197, 217, 0.16);
-      padding: 18px 0 26px;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .notice {
-      margin: 0;
-    }
-
-    @keyframes floatHero {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-banner {
-        animation: none;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-
-      .grid {
-        transition: none;
-      }
-    }
-
-    @media (max-width: 980px) {
-      .wrap {
-        padding: 0 18px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .topic-list {
-        grid-template-columns: 1fr;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .review-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 14px 0;
-      }
-
-      .hero {
-        padding-top: 44px;
-      }
-
-      .hero h1 {
-        max-width: 100%;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .review-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .top-contact-inner {
-        font-size: 0.84rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CircuitNest Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#111827;
+color:white;
+}
+
+/* TOP BAR */
+
+.topbar{
+background:#0f172a;
+padding:10px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+color:#ff9900;
+}
+
+.search{
+display:flex;
+flex:1;
+margin:0 20px;
+max-width:600px;
+}
+
+.search input{
+width:100%;
+padding:12px;
+border:none;
+outline:none;
+border-radius:5px 0 0 5px;
+}
+
+.search button{
+padding:12px 20px;
+background:#ff9900;
+border:none;
+font-weight:600;
+cursor:pointer;
+border-radius:0 5px 5px 0;
+}
+
+.nav{
+display:flex;
+gap:20px;
+}
+
+.nav a{
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+/* HERO */
+
+.hero{
+height:400px;
+background:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+padding:50px;
+}
+
+.hero-content{
+background:rgba(0,0,0,0.7);
+padding:30px;
+border-radius:10px;
+max-width:500px;
+}
+
+.hero h1{
+font-size:45px;
+margin-bottom:15px;
+}
+
+.hero p{
+margin-bottom:20px;
+line-height:1.6;
+}
+
+.hero button{
+padding:14px 25px;
+background:#ff9900;
+border:none;
+font-weight:700;
+cursor:pointer;
+border-radius:5px;
+}
+
+/* SECTION */
+
+.section{
+padding:40px 30px;
+}
+
+.section h2{
+margin-bottom:25px;
+font-size:30px;
+}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+.card{
+background:#1f2937;
+border-radius:10px;
+overflow:hidden;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.card-body{
+padding:20px;
+}
+
+.card-body h3{
+margin-bottom:10px;
+font-size:20px;
+}
+
+.price{
+color:#ff9900;
+font-size:22px;
+font-weight:700;
+margin:10px 0;
+}
+
+.rating{
+margin-bottom:15px;
+color:gold;
+}
+
+.buttons{
+display:flex;
+gap:10px;
+}
+
+.buy{
+flex:1;
+padding:12px;
+background:#ff9900;
+border:none;
+font-weight:600;
+cursor:pointer;
+border-radius:5px;
+}
+
+.cart{
+flex:1;
+padding:12px;
+background:#374151;
+border:none;
+color:white;
+font-weight:600;
+cursor:pointer;
+border-radius:5px;
+}
+
+/* FOOTER */
+
+footer{
+background:#0f172a;
+padding:30px;
+text-align:center;
+margin-top:40px;
+color:#9ca3af;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.topbar{
+flex-direction:column;
+gap:15px;
+}
+
+.search{
+margin:0;
+width:100%;
+}
+
+.hero{
+padding:20px;
+height:auto;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+}
+
+</style>
 </head>
+
 <body>
-  <div class="top-contact">
-    <div class="wrap top-contact-inner">
-      <span>Mobile: <a href="tel:+918956919539">8956919539</a></span>
-      <span>WhatsApp: <a href="https://wa.me/918956919539" target="_blank" rel="noopener noreferrer">8956919539</a></span>
-    </div>
-  </div>
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="#">
-        <span class="dot" aria-hidden="true"></span>
-        CircuitNest Projects
-      </a>
-      <nav class="nav-links" aria-label="Main">
-        <a href="#projects">Projects</a>
-        <a href="#topics">Topics</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#custom">Custom Build</a>
-        <a href="#contact">Order</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero" id="custom">
-      <h1>Electronics Engineering Projects Ready for Sale</h1>
-      <p>Buy complete academic and prototype-grade electronics projects with circuit diagrams, code, report files, and build guidance. Made for diploma, B.Tech, and final-year submissions.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">Browse Projects</a>
-        <a href="#contact" class="btn btn-soft">Request Custom Project</a>
-      </div>
-      <div class="hero-banner">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="Electronic circuit board with microchips">
-        <div class="overlay">Includes Arduino, IoT, Embedded C, PCB-ready designs, and project documentation.</div>
-      </div>
-    </section>
+<!-- TOPBAR -->
 
-    <section class="section" id="projects">
-      <h2>Project Catalog</h2>
-      <div class="chips" id="categoryFilters" aria-label="Project category filters">
-        <button class="chip active" data-filter="all" type="button">All</button>
-        <button class="chip" data-filter="iot" type="button">IoT</button>
-        <button class="chip" data-filter="robotics" type="button">Robotics</button>
-        <button class="chip" data-filter="power" type="button">Power Electronics</button>
-        <button class="chip" data-filter="embedded" type="button">Embedded</button>
-        <button class="chip" data-filter="telecom" type="button">Telecom</button>
-        <button class="chip" data-filter="security" type="button">Security</button>
-        <button class="chip" data-filter="automation" type="button">Automation</button>
-      </div>
-      <div class="stats-grid" id="categoryStats"></div>
-      <div class="grid" id="projectGrid"></div>
-    </section>
+<div class="topbar">
 
-    <section class="section" id="topics">
-      <h2>Electronics & Telecommunication Project Topics</h2>
-      <div class="contact">
-        <input type="search" id="topicSearch" placeholder="Search topics like RFID, GSM, Robot, Temperature..." aria-label="Search project topics">
-        <p class="notice" style="margin-top:10px;"><span id="topicCount">0</span> topics available</p>
-        <div class="topic-list" id="topicList"></div>
-      </div>
-    </section>
+<div class="logo">
+CircuitNest
+</div>
 
-    <section class="section" id="reviews">
-      <h2>Student Reviews</h2>
-      <div class="review-grid">
-        <article class="review-card">
-          <div class="review-head">
-            <h3 class="review-name">Rahul Sharma</h3>
-            <p class="review-stars">5/5</p>
-          </div>
-          <p class="review-text">Project delivery was on time and the documentation was very clear for viva. Great support till final submission.</p>
-        </article>
-        <article class="review-card">
-          <div class="review-head">
-            <h3 class="review-name">Priya Nair</h3>
-            <p class="review-stars">5/5</p>
-          </div>
-          <p class="review-text">I took an IoT health monitoring project. Circuit, code and report were all complete and easy to understand.</p>
-        </article>
-        <article class="review-card">
-          <div class="review-head">
-            <h3 class="review-name">Amit Verma</h3>
-            <p class="review-stars">4/5</p>
-          </div>
-          <p class="review-text">Good quality electronics project with live demo support. Minor changes were done quickly after my request.</p>
-        </article>
-        <article class="review-card">
-          <div class="review-head">
-            <h3 class="review-name">Sneha Kulkarni</h3>
-            <p class="review-stars">5/5</p>
-          </div>
-          <p class="review-text">Very professional service. I ordered custom automation project and got proper explanation for every module.</p>
-        </article>
-        <article class="review-card">
-          <div class="review-head">
-            <h3 class="review-name">Rohit Patil</h3>
-            <p class="review-stars">4/5</p>
-          </div>
-          <p class="review-text">Affordable pricing and helpful guidance for testing. My project worked smoothly during final presentation.</p>
-        </article>
-        <article class="review-card">
-          <div class="review-head">
-            <h3 class="review-name">Neha Gupta</h3>
-            <p class="review-stars">5/5</p>
-          </div>
-          <p class="review-text">Excellent experience. Communication on WhatsApp was quick and I got complete files including source code and report.</p>
-        </article>
-      </div>
-    </section>
+<div class="search">
+<input type="text" placeholder="Search Electronics Projects...">
+<button>Search</button>
+</div>
 
-    <section class="section" id="contact">
-      <h2>Order & Inquiry</h2>
-      <div class="contact">
-        <p class="notice">Tell us your branch, project topic, and submission deadline. We will respond with pricing and delivery timeline.</p>
-        <form>
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Email" required>
-          <select name="projectType" required>
-            <option value="">Select Project Type</option>
-            <option>Ready-Made Project</option>
-            <option>Custom Electronics Project</option>
-            <option>Bulk College Order</option>
-          </select>
-          <textarea name="message" placeholder="Example: Need smart irrigation project using ESP32 + app support. Deadline: 20 days." required></textarea>
-          <button class="btn btn-primary" type="submit">Send Inquiry</button>
-        </form>
-      </div>
-    </section>
-  </main>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Projects</a>
+<a href="#">Orders</a>
+<a href="#">Cart</a>
+<a href="#">Account</a>
+</div>
 
-  <footer>
-    <div class="wrap">
-      <p class="notice">CircuitNest Projects | Electronics project store for students and innovators.</p>
-    </div>
-  </footer>
+</div>
 
-  <script>
-    const grid = document.getElementById("projectGrid");
-    const filters = document.getElementById("categoryFilters");
-    const statsGrid = document.getElementById("categoryStats");
-    const topicSearch = document.getElementById("topicSearch");
-    const topicList = document.getElementById("topicList");
-    const topicCount = document.getElementById("topicCount");
-    const topicText = `
-Electronics And Telecommunication Projects
-Voice Controlled Home Automation
-Programmable Energy Meter With Bill Estimation
-Automated RF plus IR Based Paid Parking Manager System
-Fingerprint Bank Locker
-Wireless Patient Health Monitoring
-Soldier Health & Position Tracking System
-GPS Handcuffs With Geographic Prohibitions
-Accurate Room Temperature Controller Project
-Automatic Light Intensity Controller By External Light Sensing
-Traffic Density Control With Android Override Using Avr
-BLDC Motor Speed Control Using Fuzzy Logic
-Touch Based Nurse Caller System
-Multi Microcontroller Based Security System
-Geo Location Guide Using RF
-Human Speed Detection Project
-Home Automation Using Android
-Ultrasonic Radar Project
-Automatic Unauthorized Parking Detector With SMS Notification To Owner
-RTC Based Pump Switcher
-Wireless Mobile Charging Project
-Ultrasonic Blind Walking Stick
-Motion Based Message Conveyer For Paralytic/Disabled People
-Fire Plus Hazardous Gas Detection And Instant SMS Alerting System
-Mini IR Radar For Unauthorized Object Detection
-CNG/LPG Gas Accident Prevention With Gsm Alert
-Gsm Based Door Unlocker system
-Automated Elevator With Overload Alert
-Remote Controlled Pick & Place Robotic Vehicle
-DC Motor Speed Control By Android
-Rf Controlled Spy Robot With Night Vision Camera
-Fire & Gas Accident Avoider System
-Solar UPS Project
-GPS Vehicle Tracking & Theft Detection
-Automated Car Parking With Empty Slot Detection
-Vehicle Movement Street Light With Light Sensing Atmega
-Auto Lap Time Measurement System
-SMS Voting System Project
-Machine Overheat Detection With Alert
-Prepaid Electricity Billing Meter
-RF Based Secure Door Opener System
-Billing System Based On RFID
-Dam Operation Based On Water Level
-Alcohol Sensing Display With Alarm Project
-Motion Based PC Video Game
-Voice Controlled Robotic Vehicle
-Remote Stepper Motor Controller System
-CNG/LPG Gas Leakage Accident Prevention System
-Robotic Vehicle With Metal Detection Project
-Programmable Sequential Load Operation Controlled By Android Application Project
-Car Overspeeding Detection Project
-Hand Motion Controlled Robotic Arm
-Hand Motion Controlled Robotic Vehicle
-Remote Controlled Robotic Arm Using Rf
-Android Controlled Robotic Arm
-RF Secure Coded Communication System
-Android Password Based Remote Door Opener System Project
-Android Controlled Remote Password Security
-Android Controlled Railway Level Gate Control
-Android Controlled Remote AC Power Control
-Robot Controlled By Android Application
-Xbee Transformer/Generator Health Monitor Project
-Security Access Control Using RFID Project
-Home Appliance Control Using Android Application Project
-Anti Stampede Monitoring And Alarm Project
-Attendance System Based On RFID Project
-Commercial Power Saver Project
-Industry Power Consumption Penalty Minimization Using AFPC Unit Project
-Obstacle Avoider Robotic Vehicle
-Precise Digital Temperature Controller
-Circuit Breaker Based On Password
-Multi Microcontroller Networking System
-Motion Based Automatic Door Opener
-Industry Temperature Control System
-Android Controlled Fire Fighter Robot
-Speech Detector Robotic Vehicle Control
-Dish Position Controller Using TV Remote
-Thyristors Based Dual Converters
-Flexible Ac Transmitter System Using TSR
-SVC Based Flexible AC Transmission System(FACTS)
-Microcontroller based 4 Quadrant speed control system
-Advanced Wireless Power Transfer System
-3d Space Wireless Power Transferring Project
-Car Parking Project Based on RFID
-Android Controlled Wildlife Observation Robot
-Controlling Pc By TV Remote as Mouse
-Car Speed Checker With Led Display
-Wireless PC Communication System
-Zigbee Based Secure Wireless Communication Using AES
-TV Remote Controlled Home Appliances Project
-Digitally Controlled Home Automation Project
-Vehicle Sensing Street Lights Project
-Lamp Illumination Control With Precision
-Load Shedding Time Management With Programmable Interface
-Industry Automation Using Programmable Switching in Repetitive Nature Of Work
-Android Controlled Induction Motor with 7 segment display
-AC Power Controller With Programmable Interface
-Robotic Arm Vehicle Controlled By Touch Screen Display
-Android Controlled Based Spy Robot With Night Vision Camera
-Android Controlled Pick And Place Robotic Arm Vehicle Project
-GPS + GSM Based Advanced Vehicle Tracking System Project
-Shuttling Metro Train Between Stations Project
-Monthly Electricity Billing Display With Bill SMS Feature
-Power Meter billing Plus Load Control Using GSM
-Industrial Load Switcher Based On Touch Screen
-FingerPrint Voting System
-Energy Management System With Programmable Numbers using GSM
-SMS Controlled Railway Level Gate Control With Programmable Numbers
-Instant Electric Circuit Breaker
-Wildlife Observation Robot Using Rf
-TV Remote Controlled Robotic Vehicle Project
-Device Load Monitor With Programmable Meter For Energy Audit
-Zero Contact TachoMeter (SpeedOMeter)
-Power Grid Failure Detection Based on Voltage and Frequency Variance Detection
-Postage Stamp Value Calculator
-Configurable Medication Reminding Syst
-Controlling Pc By TV Remote as Mouse
-Testing Life Cycle Of Electrical Loads Using Down Counter
-IR Based Obstacle Detection For Load Switching Project
-IR Based Traffic Density Detection And Signal Adjustment
-PC Based Home Automation
-AC Power Strength Controller System
-Traffic Signals With Synchronization System
-Solar Panel With Sun Position Tracking
-Multi Motors With Synchronized Speed
-Irrigation System running on Solar Power
-System To Measure Solar Power
-Controlling Solar Energy Charge
-MC Based Line Follower Robot
-Single Phase Induction Motor With Smooth Start
-Configurable Password Security System
-Supervisory Controlling Plus Data Acquisition For Remote Industry
-RFID Based Passport Project
-Android Controlled Notice Board Project
-Displaying message Using Led Propeller
-Load Control System Using DTMF
-Ultrasonic Distance Measurement Project
-Dialled Telephone Number Display On 7 Segment
-IR Based Dish Position Controller
-Discotheque Flashing Stroboscopic Light
-Dynamic Signal Light Timings On Traffic Density
-Density based traffic controller with android overriding ability
-Liquid Level Controller System Without Contact
-Thyristor Based Cyclo Converter
-Closed Loop DC Motor Control To Run It At Exact Speed
-Remote Vehicle Control Through Cell Phone
-DTMF Cell Phone Based Door Opener
-RPM Display For BLDC Motor With Speed Controller
-Testing Life Cycle Of Electrical Loads Using Down Counter
-IR Based Obstacle Detection For Load Switching Project
-IR Based Traffic Density Detection And Signal Adjustment
-Remote Controlled Induction Motor Controller
-MC Based Remote Beacon Flasher
-Patient Health Check Using Wireless Health Monitor
-Induction Motor Timer Using Auto Delta Star Starter
-Multi-Power Supply Using 4 Different Sources
-Electrical Load Controlled By PC
-Gsm Based Weather Reporting (Temperature/Light/Humidity)
-Fingerprint Authenticated Device Switcher
-Fingerprint Based Exam Hall Authentication
-Displaying Moving Message On Notice Board Using PC
-Efficient Power Manager Project
-Android Circuit Breaker
-IR Remote Thyristor Power Controller
-Controlling Induction Motor Power Through Thyristor
-ZVS Based 3 Stage Solid State Relay
-DC Motor Speed Controller
-Visitor Sensor Light With Seven Segment Display
-Display Object Counter On 7 Segment Display
-Extending Life Of Lamps Using Zero Voltage Switching
-Cycle Switching Without Harmonics For Industrial Power Control
-Thyristor Firing Angle Control For Battery Charging
-Home Automation Using Touch Screen
-Automating Homes Using RF
-Auto Irrigation using soil moisture sensor
-Street light automatic intensity controller
-Automatic Toll Collection Project
-Intelligent Energy Saving Using Human Sensing
-Wireless Surveillance Robot
-Microstrip 90 degree branch line coupler
-Robust Digital Signature For Image Authentication
-Home Security using Gsm
-Detecting Edges Using Image Processor
-Mobile Charging On Coin Insertion
-Wdm Industry automation system
-Audio Frequency Generator & Response Analyzer
-Image data reconstruction
-Distributed database for mobile computing
-Location Based GPS Advertisement Project
-Touch Pad Based Device Project
-Attack Source Tracing Project
-Dynamic Routing Algorithm
-Industry Color Mixer Using Gsm
-Fire Fighter Robot Project
-Automatic PC Surveillance System Camera
-Early Flood Detection System
-`;
-    const topics = [...new Set(
-      topicText
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((line) => line && line.toLowerCase() !== "electronics and telecommunication projects")
-    )];
+<!-- HERO -->
 
-    const categoryImageMap = {
-      iot: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
-      robotics: "https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1000&q=80",
-      power: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1000&q=80",
-      embedded: "https://images.unsplash.com/photo-1563770660941-10a63607668e?auto=format&fit=crop&w=1000&q=80",
-      telecom: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1000&q=80",
-      security: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1000&q=80",
-      automation: "https://images.unsplash.com/photo-1573164574230-db1d5e960238?auto=format&fit=crop&w=1000&q=80"
-    };
+<section class="hero">
 
-    const categoryPriceMap = {
-      iot: "INR 5,900+",
-      robotics: "INR 6,900+",
-      power: "INR 7,500+",
-      embedded: "INR 5,200+",
-      telecom: "INR 6,300+",
-      security: "INR 6,100+",
-      automation: "INR 6,600+"
-    };
+<div class="hero-content">
 
-    const categoryOrder = ["iot", "robotics", "power", "embedded", "telecom", "security", "automation"];
+<h1>Electronics Project Marketplace</h1>
 
-    function detectCategory(title) {
-      const value = title.toLowerCase();
-      if (value.includes("robot") || value.includes("arm") || value.includes("pick & place") || value.includes("line follower")) return "robotics";
-      if (value.includes("gsm") || value.includes("gps") || value.includes("rf") || value.includes("zigbee") || value.includes("xbee") || value.includes("wireless") || value.includes("communication") || value.includes("dtmf")) return "telecom";
-      if (value.includes("power") || value.includes("thyristor") || value.includes("voltage") || value.includes("billing") || value.includes("motor") || value.includes("energy") || value.includes("ups") || value.includes("solar") || value.includes("relay") || value.includes("converter")) return "power";
-      if (value.includes("security") || value.includes("door") || value.includes("fingerprint") || value.includes("locker") || value.includes("theft") || value.includes("passport") || value.includes("auth") || value.includes("password")) return "security";
-      if (value.includes("automation") || value.includes("controller") || value.includes("control") || value.includes("switch") || value.includes("industry") || value.includes("traffic") || value.includes("parking") || value.includes("elevator")) return "automation";
-      if (value.includes("iot") || value.includes("android") || value.includes("smart") || value.includes("cloud") || value.includes("monitor") || value.includes("health")) return "iot";
-      return "embedded";
-    }
+<p>
+Buy ready-made engineering projects, IoT systems,
+robotics builds, automation kits and embedded electronics.
+</p>
 
-    function categoryLabel(category) {
-      const labels = {
-        iot: "IoT",
-        robotics: "Robotics",
-        power: "Power Electronics",
-        embedded: "Embedded",
-        telecom: "Telecom",
-        security: "Security",
-        automation: "Automation"
-      };
-      return labels[category] || "Embedded";
-    }
+<button>Shop Now</button>
 
-    const projects = topics.map((title) => {
-      const category = detectCategory(title);
-      return {
-        title,
-        category,
-        level: categoryLabel(category),
-        price: categoryPriceMap[category] || "INR 5,000+",
-        description: "Complete project with circuit diagram, code, report, and implementation support.",
-        image: categoryImageMap[category] || categoryImageMap.embedded
-      };
-    });
+</div>
 
-    let cardObserver;
+</section>
 
-    function observeCards() {
-      if (!("IntersectionObserver" in window)) return;
-      if (cardObserver) cardObserver.disconnect();
-      cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            cardObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      document.querySelectorAll(".card.reveal").forEach((card) => cardObserver.observe(card));
-    }
+<!-- PRODUCTS -->
 
-    function getSortedProjects(filter) {
-      const list = filter === "all" ? projects : projects.filter((p) => p.category === filter);
-      return [...list].sort((a, b) => {
-        const categoryDiff = categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
-        if (categoryDiff !== 0) return categoryDiff;
-        return a.title.localeCompare(b.title);
-      });
-    }
+<section class="section">
 
-    function renderCategoryStats(activeFilter = "all") {
-      const counts = projects.reduce((acc, item) => {
-        acc[item.category] = (acc[item.category] || 0) + 1;
-        return acc;
-      }, {});
-      statsGrid.innerHTML = "";
-      const allCount = projects.length;
-      const cards = [{ key: "all", label: "All Projects", value: allCount }]
-        .concat(categoryOrder.map((key) => ({ key, label: categoryLabel(key), value: counts[key] || 0 })));
+<h2>Trending Projects</h2>
 
-      cards.forEach((item) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "stat-card" + (item.key === activeFilter ? " active" : "");
-        button.dataset.filter = item.key;
-        button.innerHTML = `
-          <span class="stat-name">${item.label}</span>
-          <span class="stat-value">${item.value}</span>
-        `;
-        statsGrid.appendChild(button);
-      });
-    }
+<div class="products">
 
-    function setActiveFilter(filter) {
-      document.querySelectorAll(".chip").forEach((chip) => {
-        chip.classList.toggle("active", chip.dataset.filter === filter);
-      });
-      renderCategoryStats(filter);
-      renderProjects(filter);
-    }
+<!-- CARD -->
 
-    function projectCard(project) {
-      const card = document.createElement("article");
-      card.className = "card reveal";
-      card.innerHTML = `
-        <img src="${project.image}" alt="${project.title}">
-        <div class="card-body">
-          <h3>${project.title}</h3>
-          <div class="meta">
-            <span>${project.level}</span>
-            <span class="price">${project.price}</span>
-          </div>
-          <p class="desc">${project.description}</p>
-          <a href="#contact" class="btn btn-soft">Order This Project</a>
-        </div>
-      `;
-      return card;
-    }
+<div class="card">
 
-    function renderProjects(filter = "all") {
-      const list = getSortedProjects(filter);
-      grid.classList.add("is-switching");
-      setTimeout(() => {
-        grid.innerHTML = "";
-        list.forEach((project, index) => {
-          const card = projectCard(project);
-          card.style.transitionDelay = `${Math.min(index * 20, 280)}ms`;
-          grid.appendChild(card);
-        });
-        requestAnimationFrame(() => {
-          grid.classList.remove("is-switching");
-          observeCards();
-        });
-      }, 120);
-    }
+<img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1000&q=80">
 
-    function renderTopics(query = "") {
-      const q = query.trim().toLowerCase();
-      const filtered = q ? topics.filter((topic) => topic.toLowerCase().includes(q)) : topics;
-      topicList.innerHTML = "";
-      filtered.forEach((topic) => {
-        const item = document.createElement("div");
-        item.className = "topic-item";
-        item.textContent = topic;
-        topicList.appendChild(item);
-      });
-      topicCount.textContent = filtered.length;
-    }
+<div class="card-body">
 
-    filters.addEventListener("click", (event) => {
-      const target = event.target.closest("button[data-filter]");
-      if (!target) return;
-      setActiveFilter(target.dataset.filter);
-    });
+<h3>Voice Controlled Robot</h3>
 
-    statsGrid.addEventListener("click", (event) => {
-      const target = event.target.closest("button[data-filter]");
-      if (!target) return;
-      setActiveFilter(target.dataset.filter);
-    });
+<p>
+Arduino based robotic vehicle with voice commands.
+</p>
 
-    topicSearch.addEventListener("input", (event) => {
-      renderTopics(event.target.value);
-    });
+<div class="price">
+₹6,999
+</div>
 
-    renderCategoryStats("all");
-    renderProjects("all");
-    renderTopics();
-  </script>
+<div class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<div class="buttons">
+<button class="buy">Buy Now</button>
+<button class="cart">Add Cart</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80">
+
+<div class="card-body">
+
+<h3>IoT Health Monitor</h3>
+
+<p>
+ESP8266 based smart patient monitoring system.
+</p>
+
+<div class="price">
+₹5,499
+</div>
+
+<div class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<div class="buttons">
+<button class="buy">Buy Now</button>
+<button class="cart">Add Cart</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1563770660941-10a63607692e?auto=format&fit=crop&w=1000&q=80">
+
+<div class="card-body">
+
+<h3>Industrial Automation</h3>
+
+<p>
+PLC based automation and relay switching project.
+</p>
+
+<div class="price">
+₹8,999
+</div>
+
+<div class="rating">
+⭐⭐⭐⭐☆
+</div>
+
+<div class="buttons">
+<button class="buy">Buy Now</button>
+<button class="cart">Add Cart</button>
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1000&q=80">
+
+<div class="card-body">
+
+<h3>RFID Door Lock</h3>
+
+<p>
+Secure RFID authentication door locking system.
+</p>
+
+<div class="price">
+₹4,999
+</div>
+
+<div class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<div class="buttons">
+<button class="buy">Buy Now</button>
+<button class="cart">Add Cart</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+CircuitNest Store © 2026 | Electronics Projects Marketplace
+</p>
+
+</footer>
+
 </body>
 </html>
