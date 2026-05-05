@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +17,8 @@ body{
 }
 
 header{
-  padding:15px 30px;
   background:#111827;
+  padding:15px 30px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -128,10 +129,6 @@ nav button{
   max-width:400px;
 }
 
-.modal-box h2{
-  margin-top:0;
-}
-
 .modal-box input{
   width:100%;
   padding:12px;
@@ -158,9 +155,9 @@ nav button{
 
 #welcomeUser{
   text-align:center;
-  margin-top:15px;
-  font-size:20px;
+  margin-top:20px;
   color:#4ade80;
+  font-size:20px;
 }
 
 </style>
@@ -195,8 +192,8 @@ Signup
 <h1>Electronics Projects Store</h1>
 
 <p>
-Buy final year electronics projects with code,
-report, circuit diagram and full support.
+Buy electronics projects with source code,
+report, circuit diagram and support.
 </p>
 
 </section>
@@ -216,7 +213,7 @@ report, circuit diagram and full support.
 </div>
 
 <button class="buy-btn"
-onclick="buyProject('IoT Health Monitoring')">
+onclick="buyProject('IoT Health Monitoring','₹6999')">
 Buy Now
 </button>
 
@@ -237,7 +234,7 @@ Buy Now
 </div>
 
 <button class="buy-btn"
-onclick="buyProject('RFID Smart Parking')">
+onclick="buyProject('RFID Smart Parking','₹5999')">
 Buy Now
 </button>
 
@@ -258,7 +255,7 @@ Buy Now
 </div>
 
 <button class="buy-btn"
-onclick="buyProject('Voice Controlled Robot')">
+onclick="buyProject('Voice Controlled Robot','₹8999')">
 Buy Now
 </button>
 
@@ -268,7 +265,7 @@ Buy Now
 
 </section>
 
-<!-- LOGIN MODAL -->
+<!-- LOGIN -->
 
 <div class="modal" id="loginModal">
 
@@ -297,7 +294,7 @@ Close
 
 </div>
 
-<!-- SIGNUP MODAL -->
+<!-- SIGNUP -->
 
 <div class="modal" id="signupModal">
 
@@ -464,13 +461,7 @@ onAuthStateChanged(auth,(user)=>{
 
 });
 
-function generateOrderId(){
-
-  return "CN" + Date.now();
-
-}
-
-window.buyProject = function(projectName){
+window.buyProject = function(projectName, price){
 
   const user = auth.currentUser;
 
@@ -481,158 +472,36 @@ window.buyProject = function(projectName){
     openLogin();
 
     return;
-
   }
 
-  const orderId = generateOrderId();
+  const orderId = "CN" + Date.now();
 
-  const paymentHTML = `
+  const phone = "918956919539";
 
-  <div id="paymentPopup"
-  style="
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  ">
+  const message =
+`Hello CircuitNest,
 
-  <div style="
-  background:#1e293b;
-  padding:25px;
-  border-radius:15px;
-  width:90%;
-  max-width:400px;
-  ">
+I want to order this project.
 
-  <h2>Complete Payment</h2>
-
-  <p><b>Project:</b> ${projectName}</p>
-
-  <p><b>Order ID:</b> ${orderId}</p>
-
-  <p><b>UPI ID:</b></p>
-
-  <div style="
-  background:#111827;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:15px;
-  ">
-  7276057489@superyes
-  </div>
-
-  <button onclick="copyUPI()"
-  style="
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  background:#2563eb;
-  color:white;
-  margin-bottom:10px;
-  ">
-  Copy UPI ID
-  </button>
-
-  <button onclick="sendOrder('${projectName}','${orderId}')"
-  style="
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  background:#16a34a;
-  color:white;
-  margin-bottom:10px;
-  ">
-  I Have Paid
-  </button>
-
-  <button onclick="closePayment()"
-  style="
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  background:#dc2626;
-  color:white;
-  ">
-  Cancel
-  </button>
-
-  </div>
-
-  </div>
-  `;
-
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    paymentHTML
-  );
-
-}
-
-window.copyUPI = function(){
-
-  navigator.clipboard.writeText(
-    "7276057489@superyes"
-  );
-
-  alert("UPI ID Copied");
-
-}
-
-window.closePayment = function(){
-
-  const popup =
-  document.getElementById("paymentPopup");
-
-  if(popup){
-
-    popup.remove();
-
-  }
-
-}
-
-window.sendOrder = function(projectName,orderId){
-
-  const user = auth.currentUser;
-
-  const email =
-  "sdyenkure_m25@et.vjti.ac.in";
-
-  const subject =
-  `New Project Order ${orderId}`;
-
-  const body =
-`New Order Received
-
-Project:
+Project Name:
 ${projectName}
+
+Price:
+${price}
 
 Order ID:
 ${orderId}
 
-Customer:
+Customer Name:
 ${user.displayName || "User"}
 
 Customer Email:
-${user.email}
+${user.email}`;
 
-UPI:
-7276057489@superyes`;
+  const whatsappURL =
+`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-  const gmailLink =
-`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-  window.open(gmailLink,"_blank");
-
-  alert("Order Sent");
-
-  closePayment();
+  window.open(whatsappURL, "_blank");
 
 }
 
