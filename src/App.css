@@ -1,0 +1,893 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #020617;
+  color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(37, 99, 235, 0.2), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(22, 163, 74, 0.12), transparent 28rem),
+    #020617;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #1e293b;
+  background: rgba(2, 6, 23, 0.92);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.brandIcon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: #2563eb;
+}
+
+.brand h1 {
+  margin: 0;
+  color: #60a5fa;
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.brand p {
+  margin: 0.25rem 0 0;
+  color: #94a3b8;
+  font-size: 0.78rem;
+}
+
+.desktopTag {
+  display: none;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: #0f172a;
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.headerSearch {
+  display: none;
+}
+
+.headerSearch span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.headerSearch input,
+.controls input,
+.controls select,
+.heroSearch input {
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: #fff;
+  outline: none;
+}
+
+.headerSearch input {
+  width: 17rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  padding: 0 1rem;
+}
+
+.cartButton {
+  border: 0;
+  border-radius: 1rem;
+  background: #1e293b;
+  color: white;
+  padding: 0.8rem 1rem;
+  font-weight: 800;
+}
+
+.notice {
+  max-width: 80rem;
+  margin: 1.25rem auto 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  border-radius: 1rem;
+  background: rgba(37, 99, 235, 0.12);
+  color: #bfdbfe;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notice button {
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.hero,
+.simpleSection,
+.benefits,
+.shopLayout {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  min-height: 34rem;
+}
+
+.heroPill,
+.eyebrow {
+  display: inline-block;
+  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero h2 {
+  margin: 1rem 0;
+  max-width: 44rem;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 0.95;
+}
+
+.hero p {
+  max-width: 42rem;
+  color: #cbd5e1;
+  font-size: 1.13rem;
+  line-height: 1.8;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button {
+  border: 0;
+  border-radius: 1rem;
+  padding: 0.95rem 1.35rem;
+  color: white;
+  font-weight: 900;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.blue {
+  background: #2563eb;
+}
+
+.green {
+  background: #16a34a;
+}
+
+.gray,
+.dark {
+  background: #334155;
+}
+
+.full {
+  width: 100%;
+}
+
+.heroSearch,
+.recommendBox {
+  margin-top: 2rem;
+  border: 1px solid rgba(96, 165, 250, 0.24);
+  border-radius: 1.5rem;
+  background: rgba(15, 23, 42, 0.86);
+  padding: 1rem;
+}
+
+.heroSearch h3 {
+  margin: 0 0 0.8rem;
+  color: #bfdbfe;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.heroSearch input {
+  width: 100%;
+  height: 3.5rem;
+  border-radius: 1rem;
+  padding: 0 1rem;
+  font-weight: 800;
+}
+
+.recommendationChips,
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.recommendationChips {
+  margin-top: 1rem;
+}
+
+.recommendationChips button,
+.categories button {
+  border: 1px solid #334155;
+  border-radius: 999px;
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 0.65rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.recommendationChips button:hover,
+.categories button:hover,
+.categories button.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+.featured,
+.productCard,
+.cartPanel,
+.benefits > div,
+.simpleCard,
+.relevantCard {
+  border: 1px solid #334155;
+  background: #0f172a;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.featured {
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.featured img {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+}
+
+.featured > div {
+  padding: 1.5rem;
+}
+
+.featured h3 {
+  margin: 0.3rem 0;
+  font-size: 1.65rem;
+}
+
+.featuredBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.featuredBottom strong,
+.priceRow strong,
+.simpleCard strong,
+.relevantCard strong,
+.modalPrice {
+  color: #facc15;
+  font-size: 1.75rem;
+}
+
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle h2,
+.shopHeader h2 {
+  margin: 0.25rem 0 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.sectionTitle > p {
+  max-width: 30rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.greenText {
+  color: #4ade80;
+}
+
+.simpleGrid,
+.relevantGrid,
+.productGrid,
+.benefits {
+  display: grid;
+  gap: 1rem;
+}
+
+.simpleGrid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.simpleCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  padding: 0;
+  color: white;
+  text-align: left;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.simpleCard:hover {
+  transform: translateY(-4px);
+  border-color: #2563eb;
+}
+
+.simpleCard img {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  opacity: 0.82;
+}
+
+.simpleCard > span {
+  position: absolute;
+  top: 7.7rem;
+  left: 1rem;
+  border-radius: 999px;
+  background: #16a34a;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.simpleCard div {
+  padding: 1rem;
+}
+
+.simpleCard h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.simpleCard p {
+  color: #94a3b8;
+  margin: 0.45rem 0;
+}
+
+.benefits {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.benefits > div {
+  border-radius: 1.5rem;
+  padding: 1.25rem;
+}
+
+.benefits b {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+}
+
+.benefits p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.shopLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  scroll-margin-top: 7rem;
+}
+
+.shopHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.controls input,
+.controls select {
+  width: 100%;
+  height: 2.9rem;
+  border-radius: 0.9rem;
+  padding: 0 1rem;
+}
+
+.recommendBox {
+  margin: 0 0 1.5rem;
+}
+
+.sectionTitle.small {
+  margin-bottom: 1rem;
+}
+
+.sectionTitle.small h3 {
+  margin: 0.25rem 0 0;
+}
+
+.relevantGrid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-top: 1rem;
+}
+
+.relevantCard {
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 0;
+  color: white;
+  text-align: left;
+}
+
+.relevantCard img {
+  width: 100%;
+  height: 7.5rem;
+  object-fit: cover;
+}
+
+.relevantCard div {
+  padding: 0.85rem;
+}
+
+.relevantCard h4 {
+  margin: 0 0 0.5rem;
+}
+
+.categories {
+  margin-bottom: 1.5rem;
+}
+
+.productGrid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.productCard {
+  overflow: hidden;
+  border-radius: 1.5rem;
+}
+
+.imageWrap {
+  position: relative;
+  height: 14rem;
+  background: #020617;
+  overflow: hidden;
+}
+
+.imageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.82;
+  transition: transform 0.4s;
+}
+
+.productCard:hover .imageWrap img {
+  transform: scale(1.08);
+}
+
+.imageShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #020617, transparent 65%);
+}
+
+.categoryPill,
+.badge {
+  position: absolute;
+  top: 1rem;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.categoryPill {
+  left: 1rem;
+  background: rgba(2, 6, 23, 0.7);
+  color: white;
+}
+
+.badge {
+  right: 1rem;
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.cardBody {
+  padding: 1.25rem;
+}
+
+.rating {
+  color: #facc15;
+  font-weight: 900;
+}
+
+.rating span {
+  color: #94a3b8;
+}
+
+.cardBody h3 {
+  margin: 0.65rem 0;
+  font-size: 1.35rem;
+}
+
+.cardBody p {
+  color: #cbd5e1;
+  line-height: 1.55;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 1rem 0;
+}
+
+.chips span {
+  border: 1px solid #334155;
+  border-radius: 999px;
+  background: #020617;
+  color: #cbd5e1;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.metaGrid div {
+  border-radius: 1rem;
+  background: #020617;
+  padding: 0.85rem;
+}
+
+.metaGrid small {
+  display: block;
+  color: #94a3b8;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1rem;
+}
+
+.priceRow span {
+  color: #64748b;
+  text-decoration: line-through;
+  font-weight: 800;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.cardActions .button,
+.qty {
+  flex: 1;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #334155;
+  border-radius: 1rem;
+  background: #020617;
+  padding: 0.25rem;
+}
+
+.qty button {
+  border: 0;
+  border-radius: 0.75rem;
+  background: #1e293b;
+  color: white;
+  padding: 0.7rem 0.9rem;
+  font-weight: 900;
+}
+
+.qty span {
+  font-weight: 900;
+}
+
+.cartPanel {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  align-self: start;
+}
+
+.cartTop {
+  background: #1e293b;
+  padding: 1.25rem;
+}
+
+.cartTop p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.cartTop h2 {
+  margin: 0.25rem 0 0;
+}
+
+.cartBody {
+  padding: 1.25rem;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 1rem;
+  background: #1e293b;
+  padding: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.cartItem p {
+  margin: 0.3rem 0 0;
+  color: #94a3b8;
+}
+
+.cartItem b {
+  color: #facc15;
+}
+
+.emptyCart,
+.emptyState {
+  border: 1px dashed #334155;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.totalRows {
+  border-top: 1px solid #334155;
+  margin: 1rem 0;
+  padding-top: 1rem;
+}
+
+.totalRows div {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.55rem 0;
+  color: #cbd5e1;
+}
+
+.totalRows .total {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(2, 6, 23, 0.84);
+  backdrop-filter: blur(10px);
+}
+
+.modalBox {
+  width: min(48rem, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  border: 1px solid #334155;
+  border-radius: 1.5rem;
+  background: #0f172a;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.5);
+}
+
+.modalHeader {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #334155;
+  background: rgba(15, 23, 42, 0.96);
+  padding: 1.5rem;
+}
+
+.modalHeader h2 {
+  margin: 0.25rem 0;
+  font-size: 2rem;
+}
+
+.iconButton {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 1rem;
+  background: #1e293b;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.infoGrid {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.infoBlock {
+  border: 1px solid #334155;
+  border-radius: 1.25rem;
+  background: #1e293b;
+  padding: 1rem;
+}
+
+.infoTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.infoTitle span {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.8rem;
+  background: #2563eb;
+  font-weight: 900;
+}
+
+.infoTitle h3 {
+  margin: 0;
+}
+
+.infoBlock p {
+  color: #cbd5e1;
+  line-height: 1.65;
+}
+
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid #334155;
+  padding: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .sectionTitle,
+  .shopHeader {
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+  }
+
+  .controls {
+    flex-direction: row;
+  }
+
+  .controls input {
+    width: 18rem;
+  }
+
+  .controls select {
+    width: 13rem;
+  }
+
+  .modalActions {
+    flex-direction: row;
+  }
+
+  .modalActions .button {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktopTag,
+  .headerSearch {
+    display: block;
+  }
+
+  .hero {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .shopLayout {
+    grid-template-columns: 1fr 340px;
+  }
+
+  .cartPanel {
+    position: sticky;
+    top: 6rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .header {
+    align-items: flex-start;
+  }
+
+  .cartButton {
+    padding: 0.75rem;
+  }
+
+  .brand h1 {
+    font-size: 1.25rem;
+  }
+
+  .cardActions,
+  .featuredBottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
