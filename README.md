@@ -1,60 +1,53 @@
-# CircuitNest Projects Store
+# CircuitNest Static GitHub Pages Site
 
-Ready-to-upload React + Vite website for GitHub Pages.
+This version does **not** need React, Vite, npm, build commands, or GitHub Actions.
 
-## Add your images
+## Upload to GitHub
 
-Extract `images.rar` and copy all image files into:
-
-```text
-public/images/
-```
-
-The folder should look like:
+Upload these files directly to your repository:
 
 ```text
-public/
-  images/
-    Smart Greenhouse Automation.avif
-    IoT Home Automation.avif
-    Automatic Street Light.avif
-    Bluetooth control Robotic Car.avif
-    ...
+index.html
+style.css
+script.js
+images/
 ```
 
-The website has fallback online images, so it will still run if some images are missing.
+## Add images
 
-## Run locally
+Extract `images.rar` and place all image files inside the `images` folder:
 
-```bash
-npm install
-npm run dev
+```text
+images/
+  Smart Greenhouse Automation.avif
+  IoT Home Automation.avif
+  Automatic Street Light.avif
+  Bluetooth control Robotic Car.avif
+  ...
 ```
 
-## Build
+If an image is missing, the website automatically uses a fallback online image.
 
-```bash
-npm run build
-```
+## Enable GitHub Pages
 
-## GitHub Pages
-
-This project includes `.github/workflows/deploy.yml`.
-
-On GitHub:
-
-1. Upload/push all files to your repository.
+1. Open your repository on GitHub.
 2. Go to **Settings > Pages**.
-3. Under **Build and deployment**, choose **GitHub Actions**.
-4. Push to the `main` branch.
-5. Open the URL shown after the workflow finishes.
+3. Under **Source**, choose **Deploy from a branch**.
+4. Select:
+   - Branch: `main`
+   - Folder: `/root`
+5. Click **Save**.
 
-## WhatsApp number
+Your site will be available at:
 
-The WhatsApp order number is set in `src/App.jsx`:
-
-```js
-const whatsappPhone = "918956919539";
+```text
+https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/
 ```
 
-Change it if needed.
+## If you still see a white screen
+
+Open the browser console:
+- Windows/Linux: `Ctrl + Shift + J`
+- Mac: `Cmd + Option + J`
+
+Then check for red errors. This static version should not show a white screen unless files are missing or not uploaded.

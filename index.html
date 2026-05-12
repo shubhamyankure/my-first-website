@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CircuitNest Projects Store</title>
+  <meta name="description" content="Buy electronics projects with source code, report, circuit diagram and support." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <div class="brandIcon">⚙️</div>
+      <div>
+        <h1>CircuitNest</h1>
+        <p>Electronics Projects Store</p>
+      </div>
+    </div>
+
+    <div class="desktopTag">Source code, report, circuit diagram and support</div>
+
+    <label class="headerSearch">
+      <span>Search projects</span>
+      <input id="headerSearch" type="search" placeholder="Search projects..." />
+    </label>
+
+    <button class="cartButton" type="button">🛒 <span id="cartCountTop">0</span></button>
+  </header>
+
+  <div id="notice" class="notice hidden">
+    <span id="noticeText"></span>
+    <button type="button" id="closeNotice">×</button>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="heroText">
+        <span class="heroPill">Final year and demo-ready project bundles</span>
+        <h2>Electronics Projects Store</h2>
+        <p>Buy electronics projects with source code, report, circuit diagram and support.</p>
+
+        <div class="heroActions">
+          <button class="button blue" id="shopProjectsBtn" type="button">Shop Projects</button>
+          <button class="button green" id="orderSimpleBtn" type="button">Order Simple Project</button>
+        </div>
+
+        <div class="heroSearch">
+          <h3>Search your project</h3>
+          <input id="heroSearch" type="search" placeholder="Search Robot, IoT, AI, Solar, Security..." />
+          <div id="heroSearchChips" class="recommendationChips"></div>
+        </div>
+      </div>
+
+      <div class="featured">
+        <img id="featuredImage" alt="Automatic Street Light" />
+        <div>
+          <p class="eyebrow">Featured project</p>
+          <h3>Automatic Street Light</h3>
+          <p>Complete package with project files, circuit diagram, documentation, and support.</p>
+          <div class="featuredBottom">
+            <strong>₹6,200</strong>
+            <button class="button green" id="featuredBuyBtn" type="button">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="simpleSection">
+      <div class="sectionTitle">
+        <div>
+          <p class="eyebrow greenText">Simple projects first</p>
+          <h2>Best Simple Projects to Start</h2>
+        </div>
+        <p>These are lower-cost, beginner-friendly projects placed on top so visitors can choose quickly.</p>
+      </div>
+      <div id="simpleGrid" class="simpleGrid"></div>
+    </section>
+
+    <section class="benefits">
+      <div><b>📦 Complete files</b><p>Source code, report, and circuit diagram included</p></div>
+      <div><b>✅ Project support</b><p>Help available after purchase</p></div>
+      <div><b>💬 WhatsApp order</b><p>Order directly with generated project details</p></div>
+    </section>
+
+    <section id="projects-section" class="shopLayout">
+      <div>
+        <div class="shopHeader">
+          <div>
+            <p class="eyebrow">CircuitNest Projects</p>
+            <h2>Available Project Packages</h2>
+          </div>
+
+          <div class="controls">
+            <input id="mainSearch" type="search" placeholder="Search projects..." />
+            <select id="sortSelect">
+              <option value="price-low">Simple projects first</option>
+              <option value="rating">Top rated</option>
+              <option value="price-high">Price: high to low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="recommendBox">
+          <div class="sectionTitle small">
+            <div>
+              <p class="eyebrow greenText">Search recommendations</p>
+              <h3 id="recommendTitle">Try popular searches</h3>
+            </div>
+            <p>Click a suggestion to instantly filter matching projects.</p>
+          </div>
+
+          <div id="searchChips" class="recommendationChips"></div>
+          <div id="relevantGrid" class="relevantGrid"></div>
+        </div>
+
+        <div id="categories" class="categories"></div>
+        <div id="productGrid" class="productGrid"></div>
+
+        <div id="emptyState" class="emptyState hidden">
+          <h3>No projects found</h3>
+          <p>Try a different category, search keyword, or sort option.</p>
+        </div>
+      </div>
+
+      <aside class="cartPanel">
+        <div class="cartTop">
+          <p>Your cart</p>
+          <h2>Order Summary</h2>
+        </div>
+
+        <div class="cartBody">
+          <div id="cartItems"></div>
+
+          <div id="emptyCart" class="emptyCart">
+            🛒
+            <p>Your cart is empty</p>
+          </div>
+
+          <div class="totalRows">
+            <div><span>Items</span><span id="cartCount">0</span></div>
+            <div><span>Support</span><span>Included</span></div>
+            <div class="total"><span>Total</span><span id="cartTotal">₹0</span></div>
+          </div>
+
+          <button id="checkoutBtn" class="button green full" type="button" disabled>Order on WhatsApp</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="modalOverlay" class="modalOverlay hidden">
+    <div class="modalBox">
+      <div class="modalHeader">
+        <div>
+          <p class="eyebrow">Project Information</p>
+          <h2 id="modalTitle"></h2>
+          <p id="modalPrice" class="modalPrice"></p>
+        </div>
+        <button class="iconButton" id="closeModal" type="button">×</button>
+      </div>
+
+      <div id="modalInfoGrid" class="infoGrid"></div>
+
+      <div class="modalActions">
+        <button id="modalOrderBtn" class="button green" type="button">Order on WhatsApp</button>
+        <button id="modalCloseBtn" class="button dark" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
